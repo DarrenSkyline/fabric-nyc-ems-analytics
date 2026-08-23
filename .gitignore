@@ -1,0 +1,43 @@
+# Raw and processed datasets
+data/
+raw/
+bronze/
+silver/
+gold/
+*.csv
+*.tsv
+*.parquet
+*.delta
+*.zip
+*.gz
+*.part
+
+# Secrets and local configuration
+.env
+.env.*
+*.secret
+secrets/
+config.local.*
+
+# Fabric and Power BI temporary files
+.pbi/
+*.pbix.autosave
+*.tmp
+*.temp
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
