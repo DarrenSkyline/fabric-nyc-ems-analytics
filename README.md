@@ -30,6 +30,7 @@ The project demonstrates:
 * **Period:** 2019–2025
 * **Source columns:** 31
 * **Incident records:** 10,881,496
+* **Source CSV files:** 47
 * **Source-year partitions:** 7
 
 Raw source files are excluded from this repository because of their size.
@@ -58,7 +59,7 @@ The analytical model is designed around the following business questions.
 
 **BQ06.** How does EMS response performance differ across NYC boroughs?
 
-**BQ07.** Whi ch areas have the greatest variability in EMS response times?
+**BQ07.** Which areas have the greatest variability in EMS response times?
 
 This question goes beyond average response time by using measures such as standard deviation, percentiles, and coefficient of variation to evaluate response reliability.
 
@@ -99,6 +100,11 @@ The project follows a Medallion Architecture in Microsoft Fabric:
 
 Raw NYC EMS CSV files are ingested into a Delta table with minimal transformation.
 
+**Output tables:**
+
+* `bronze_ems_incidents`
+* `bronze_ems_ingestion_audit`
+
 Key Bronze validations include:
 
 * Source file validation
@@ -107,6 +113,8 @@ Key Bronze validations include:
 * Incident identifier completeness
 * Incident identifier uniqueness
 * Source-year partition validation
+
+The completed Bronze layer validated 47 source CSV files, 10,881,496 incident records, 31 source columns, and seven source years. No missing or duplicate incident identifiers were found, and all yearly file-count and row-count validations passed.
 
 ### Silver Layer
 
@@ -130,6 +138,13 @@ Transformations include:
 * Data-quality status validation
 
 Invalid response-time observations are retained in the source fields for traceability but excluded from validated response-time measures used for statistical analysis.
+
+**Output tables:**
+
+* `silver_ems_incidents`
+* `silver_ems_data_quality_audit`
+
+The completed Silver table contains 10,881,496 incident-level records and 63 columns. Validation confirmed that the Silver transformation preserved the Bronze row count, introduced no duplicate or missing incident identifiers, produced no source-year mismatches, and passed the final data-quality audit.
 
 ### Gold Layer
 
@@ -193,19 +208,21 @@ Business Insights and Recommendations
 * Source data acquisition for 2019–2025
 * Bronze ingestion pipeline
 * Bronze data-quality validation
-* Silver cleaning and transformation design
+* Bronze ingestion audit table
+* Silver cleaning and transformation pipeline
 * Silver feature engineering
 * Silver response-time validation
+* Silver Delta table persistence
+* Silver data-quality audit table
 * Business question definition
 
 ### In Progress
 
-* Silver Delta table persistence and validation
-* Silver data-quality audit
+* Gold dimensional model design
+* Gold fact and dimension table development
 
 ### Next Steps
 
-* Design the Gold dimensional model
 * Build Gold fact and dimension tables
 * Validate Gold analytical outputs
 * Develop SQL analytical queries
