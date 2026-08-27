@@ -148,9 +148,9 @@ The completed Silver table contains 10,881,496 incident-level records and 63 col
 
 ### Gold Layer
 
-The Gold layer will provide business-ready fact and dimension tables designed around the project's business questions and Power BI analytical requirements.
+The Gold layer provides business-ready fact and dimension tables designed around the project's business questions and Power BI analytical requirements.
 
-The target model will support analysis across:
+The completed dimensional model supports analysis across:
 
 * Date and time
 * Geography
@@ -159,6 +159,54 @@ The target model will support analysis across:
 * Incident disposition
 * Operational indicators
 * Response performance
+
+**Completed dimension tables:**
+
+* `gold_dim_date`
+* `gold_dim_time`
+* `gold_dim_geography`
+* `gold_dim_call_type`
+* `gold_dim_severity`
+* `gold_dim_disposition`
+
+**Completed fact table:**
+
+* `gold_fact_ems_incident`
+
+The fact table preserves the incident-level grain of one row per EMS incident and contains 29 columns. It is partitioned by `incident_year` and connects to the Gold dimensions through eight foreign keys covering date, time, geography, initial and final call type, initial and final severity, and incident disposition.
+
+Gold validation confirmed that the fact-table row count matches the Silver table, incident identifiers remain unique, yearly row counts are preserved, and no orphan dimension keys were introduced.
+
+### Incident Disposition Mapping
+
+`gold_dim_disposition` enriches the source disposition codes using the official NYC EMS documentation while preserving every distinct code found in Silver.
+
+The business categories include:
+
+* Transported
+* Not Transported
+* Death on Scene
+* Patient Not Located / Unfounded
+* Cancelled / Not Dispatched
+* Duplicate Incident
+* Unknown / No Disposition
+* Undocumented
+
+The source codes `82A`, `82B`, and `TELC` occur in the data but are not included in the current official mapping. They are retained unchanged, labelled as undocumented, and identified through mapping-status fields rather than removed or assigned an unsupported meaning.
+
+### Planned Gold Analytics Layer
+
+The next notebook, `05_build_gold_analytics`, will create reusable analytical tables for KPI reporting, response-time variability, statistical control limits, anomaly detection, trend analysis, and forecasting support. Planned outputs will be documented after their implementation and validation.
+
+## Pipeline Notebooks
+
+| Notebook | Purpose | Status |
+|---|---|---|
+| `01_ingest_bronze.ipynb` | Ingest and validate the raw CSV files | Completed |
+| `02_clean_silver.ipynb` | Clean, type, validate, and enrich incident records | Completed |
+| `03_build_gold_dimensions.ipynb` | Build and validate the Gold dimensions | Completed |
+| `04_build_gold_fact.ipynb` | Build and validate the incident fact table | Completed |
+| `05_build_gold_analytics.ipynb` | Build KPI, variability, control-limit, anomaly, and trend tables | Next stage |
 
 ## Analytics Workflow
 
@@ -215,16 +263,19 @@ Business Insights and Recommendations
 * Silver Delta table persistence
 * Silver data-quality audit table
 * Business question definition
+* Gold dimensional model
+* Gold date, time, geography, call-type, severity, and disposition dimensions
+* Official disposition mapping with undocumented source-code retention
+* Gold incident fact table
+* Gold fact-table foreign-key and row-count validation
 
 ### In Progress
 
-* Gold dimensional model design
-* Gold fact and dimension table development
+* Gold analytics-table design in `05_build_gold_analytics`
 
 ### Next Steps
 
-* Build Gold fact and dimension tables
-* Validate Gold analytical outputs
+* Build and validate Gold analytical aggregate tables
 * Develop SQL analytical queries
 * Build the Power BI semantic model
 * Create statistical DAX measures
