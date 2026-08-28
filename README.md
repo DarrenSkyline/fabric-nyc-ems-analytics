@@ -234,6 +234,42 @@ The completed Gold audit confirmed that the dimensions are non-empty, fact ident
 | `04_build_gold_fact.ipynb` | Build and validate the incident fact table | Completed |
 | `05_build_gold_analytics.ipynb` | Build KPI, variability, control-limit, anomaly, and trend tables | Completed |
 
+## Validation Evidence
+
+The following screenshots provide execution evidence from Microsoft Fabric. They show the persisted Lakehouse tables and the validation results produced by the Bronze, Silver, and Gold pipelines.
+
+### Lakehouse Tables
+
+The Lakehouse contains the completed Bronze, Silver, Gold dimension, Gold fact, analytical aggregate, and audit tables.
+
+![Microsoft Fabric Lakehouse tables](screenshots/01_lakehouse_tables.png)
+
+### Bronze Validation
+
+The Bronze pipeline validates the source files, source schema, yearly row counts, incident identifier completeness, and Delta-table output.
+
+![Bronze ingestion validation](screenshots/02_bronze_validation.png)
+
+### Silver Validation
+
+The Silver pipeline confirms row-count preservation, complete and unique incident identifiers, successful type conversion, source-year consistency, and the final data-quality status.
+
+![Silver transformation validation](screenshots/03_silver_validation.png)
+
+### Gold Fact Validation
+
+The Gold fact validation confirms the incident-level grain, row-count reconciliation, identifier uniqueness, yearly totals, and dimension-key integrity.
+
+![Gold fact-table validation](screenshots/05_gold_fact_validation.png)
+
+### Gold Analytics Validation
+
+The Gold analytics validation confirms fact-to-aggregate reconciliation, daily-grain uniqueness, control-limit consistency, anomaly-quality rules, and the final Gold audit status.
+
+![Gold analytics and audit validation](screenshots/06_gold_analytics_validation.png)
+
+The Gold star-schema relationship diagram will be added after the Power BI semantic model has been created.
+
 ## Analytics Workflow
 
 ```text
@@ -299,6 +335,7 @@ Business Insights and Recommendations
 * Rolling centre line and three-standard-deviation control limits
 * Statistical anomaly detection with sample-quality safeguards
 * Gold data-quality audit table
+* Pipeline validation evidence screenshots
 
 ### In Progress
 
