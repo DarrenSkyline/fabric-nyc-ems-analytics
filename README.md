@@ -194,9 +194,35 @@ The business categories include:
 
 The source codes `82A`, `82B`, and `TELC` occur in the data but are not included in the current official mapping. They are retained unchanged, labelled as undocumented, and identified through mapping-status fields rather than removed or assigned an unsupported meaning.
 
-### Planned Gold Analytics Layer
+### Gold Analytics Layer
 
-The next notebook, `05_build_gold_analytics`, will create reusable analytical tables for KPI reporting, response-time variability, statistical control limits, anomaly detection, trend analysis, and forecasting support. Planned outputs will be documented after their implementation and validation.
+The completed Gold analytics layer provides reusable daily performance measures for KPI reporting, response-time reliability analysis, statistical control charts, anomaly detection, trend analysis, and forecasting support.
+
+The daily analytical table has the following grain:
+
+> **One row = one incident date × borough × initial severity level**
+
+**Output tables:**
+
+* `gold_agg_daily_performance`
+* `gold_ems_data_quality_audit`
+
+The analytical measures include:
+
+* Daily incident volume and valid-response coverage
+* Average dispatch, incident-response, and travel time
+* Population standard deviation and coefficient of variation
+* P50, P75, P90, and P95 response times
+* Minimum and maximum response times
+* Held, special-event, and transfer incident rates
+* Historical rolling centre line
+* Upper and lower statistical control limits
+* Statistical and reportable anomaly indicators
+* Small-sample and insufficient-baseline quality flags
+
+Control limits are calculated separately for each borough and initial severity level using the previous 30 eligible daily observations. The current observation is excluded from its own historical baseline. A daily group requires at least 30 valid incident-response records, and at least 20 eligible historical observations are required before a reportable anomaly can be produced.
+
+The completed Gold audit confirmed that the dimensions are non-empty, fact identifiers are complete and unique, daily aggregated incident totals reconcile to the Gold fact table, the daily analytical grain contains no duplicates, and the control-limit and reportable-anomaly validations pass.
 
 ## Pipeline Notebooks
 
@@ -206,7 +232,7 @@ The next notebook, `05_build_gold_analytics`, will create reusable analytical ta
 | `02_clean_silver.ipynb` | Clean, type, validate, and enrich incident records | Completed |
 | `03_build_gold_dimensions.ipynb` | Build and validate the Gold dimensions | Completed |
 | `04_build_gold_fact.ipynb` | Build and validate the incident fact table | Completed |
-| `05_build_gold_analytics.ipynb` | Build KPI, variability, control-limit, anomaly, and trend tables | Next stage |
+| `05_build_gold_analytics.ipynb` | Build KPI, variability, control-limit, anomaly, and trend tables | Completed |
 
 ## Analytics Workflow
 
@@ -268,17 +294,21 @@ Business Insights and Recommendations
 * Official disposition mapping with undocumented source-code retention
 * Gold incident fact table
 * Gold fact-table foreign-key and row-count validation
+* Gold daily performance aggregate table
+* Population standard deviation, percentiles, and coefficient of variation
+* Rolling centre line and three-standard-deviation control limits
+* Statistical anomaly detection with sample-quality safeguards
+* Gold data-quality audit table
 
 ### In Progress
 
-* Gold analytics-table design in `05_build_gold_analytics`
+* SQL Analytics Endpoint validation and analytical query development
 
 ### Next Steps
 
-* Build and validate Gold analytical aggregate tables
 * Develop SQL analytical queries
 * Build the Power BI semantic model
 * Create statistical DAX measures
 * Develop the Power BI dashboard
-* Perform anomaly detection and forecasting
+* Add time-series forecasting and projection visuals
 * Document findings and business recommendations
