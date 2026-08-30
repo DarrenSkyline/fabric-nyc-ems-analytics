@@ -602,6 +602,127 @@ ORDER BY table_name;
 
 
 -- ============================================================================
+-- 11A. Validate call-type description completeness and mapping
+-- Purpose:
+--     Confirm that:
+--       1. Every call type has a non-null and non-blank description
+--       2. Documented, undocumented and unknown records reconcile to the
+--          complete Call Type dimension
+--       3. The UNKNOWN code, if present, uses the controlled description
+--          UNKNOWN CALL TYPE
+--
+-- Expected result:
+--     missing_description_rows = 0
+--     invalid_unknown_mapping_rows = 0
+--     validation_status = PASS
+--
+-- Notes:
+--     undocumented_call_type_rows is an informational data-quality measure.
+--     Undocumented source codes are intentionally retained and do not cause
+--     validation failure.
+-- ============================================================================
+
+WITH call_type_description_validation AS
+(
+    SELECT
+        COUNT_BIG(*) AS total_call_types,
+
+        SUM(
+            CASE
+                WHEN call_type_description IS NULL
+                  OR LTRIM(
+                        RTRIM(
+                            call_type_description
+                        )
+                     ) = ''
+                THEN 1
+                ELSE 0
+            END
+        ) AS missing_description_rows,
+
+        SUM(
+            CASE
+                WHEN call_type_description
+                     = 'UNDOCUMENTED CALL TYPE'
+                THEN 1
+                ELSE 0
+            END
+        ) AS undocumented_call_type_rows,
+
+        SUM(
+            CASE
+                WHEN call_type_description
+                     = 'UNKNOWN CALL TYPE'
+                THEN 1
+                ELSE 0
+            END
+        ) AS unknown_call_type_rows,
+
+        SUM(
+            CASE
+                WHEN call_type_description IS NOT NULL
+                 AND LTRIM(
+                        RTRIM(
+                            call_type_description
+                        )
+                     ) <> ''
+                 AND call_type_description
+                     NOT IN
+                     (
+                         'UNDOCUMENTED CALL TYPE',
+                         'UNKNOWN CALL TYPE'
+                     )
+                THEN 1
+                ELSE 0
+            END
+        ) AS documented_call_type_rows,
+
+        SUM(
+            CASE
+                WHEN
+                    (
+                        call_type = 'UNKNOWN'
+                        AND call_type_description
+                            <> 'UNKNOWN CALL TYPE'
+                    )
+                  OR
+                    (
+                        call_type <> 'UNKNOWN'
+                        AND call_type_description
+                            = 'UNKNOWN CALL TYPE'
+                    )
+                THEN 1
+                ELSE 0
+            END
+        ) AS invalid_unknown_mapping_rows
+
+    FROM dbo.gold_dim_call_type
+)
+SELECT
+    total_call_types,
+    documented_call_type_rows,
+    undocumented_call_type_rows,
+    unknown_call_type_rows,
+    missing_description_rows,
+    invalid_unknown_mapping_rows,
+
+    CASE
+        WHEN total_call_types > 0
+         AND missing_description_rows = 0
+         AND invalid_unknown_mapping_rows = 0
+         AND
+             documented_call_type_rows
+             + undocumented_call_type_rows
+             + unknown_call_type_rows
+             = total_call_types
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS validation_status
+
+FROM call_type_description_validation;
+
+
+-- ============================================================================
 -- 12. Identify duplicate dimension keys
 -- Expected result:
 --     All queries return no rows

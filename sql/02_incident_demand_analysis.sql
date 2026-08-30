@@ -10,9 +10,9 @@ Purpose:
     Analyse EMS incident demand across time, geography and call type.
 
 Business questions:
-    BQ01. How has EMS incident volume changed from 2019 to 2025?
-    BQ02. At what times and days is EMS demand highest?
-    BQ03. Which boroughs experience the highest EMS incident volumes?
+    BQ01. How has EMS incident volume changed over time from 2019 to 2025?
+    BQ02. At what times of day and days of the week is EMS demand highest?
+    BQ03. Which NYC boroughs experience the highest EMS incident volumes?
     BQ04. What are the most common EMS call types?
 
 Data source:
@@ -87,8 +87,8 @@ SELECT
                 ),
                 0
             ) * 100,
-            2
-        ) AS DECIMAL(20,2)
+            6
+        ) AS DECIMAL(20,6)
     ) AS year_over_year_change_percentage
 
 FROM annual_with_previous_year
@@ -181,8 +181,8 @@ SELECT
                 ),
                 0
             ) * 100,
-            2
-        ) AS DECIMAL(20,2)
+            6
+        ) AS DECIMAL(20,6)
     ) AS month_over_month_change_percentage
 
 FROM monthly_with_previous_month
@@ -293,8 +293,8 @@ SELECT
             /
             SUM(total_incidents) OVER ()
             * 100,
-            2
-        ) AS DECIMAL(20,2)
+            6
+        ) AS DECIMAL(20,6)
     ) AS incident_percentage,
 
     RANK() OVER
@@ -394,9 +394,9 @@ SELECT
             /
             SUM(total_incidents) OVER ()
             * 100,
-            4
+            6
         )
-        AS DECIMAL(20,4)
+        AS DECIMAL(20,6)
     )AS incident_percentage,
 
     RANK() OVER
@@ -424,6 +424,7 @@ WITH initial_call_type_incidents AS
 (
     SELECT
         ct.call_type,
+        ct.call_type_description,
 
         SUM(f.incident_count)
             AS total_incidents
@@ -434,10 +435,12 @@ WITH initial_call_type_incidents AS
         ON f.initial_call_type_key = ct.call_type_key
 
     GROUP BY
-        ct.call_type
+        ct.call_type,
+        ct.call_type_description
 )
 SELECT
     call_type,
+    call_type_description,
     total_incidents,
 
     CAST(
@@ -483,6 +486,7 @@ WITH initial_call_types AS
 (
     SELECT
         ct.call_type,
+        ct.call_type_description,
 
         SUM(f.incident_count)
             AS initial_incident_count
@@ -493,12 +497,14 @@ WITH initial_call_types AS
         ON f.initial_call_type_key = ct.call_type_key
 
     GROUP BY
-        ct.call_type
+        ct.call_type,
+        ct.call_type_description
 ),
 final_call_types AS
 (
     SELECT
         ct.call_type,
+        ct.call_type_description,
 
         SUM(f.incident_count)
             AS final_incident_count
@@ -509,13 +515,19 @@ final_call_types AS
         ON f.final_call_type_key = ct.call_type_key
 
     GROUP BY
-        ct.call_type
+        ct.call_type,
+        ct.call_type_description
 )
 SELECT
     COALESCE(
         initial_ct.call_type,
         final_ct.call_type
     ) AS call_type,
+
+    COALESCE(
+        initial_ct.call_type_description,
+        final_ct.call_type_description
+    ) AS call_type_description,
 
     COALESCE(
         initial_ct.initial_incident_count,

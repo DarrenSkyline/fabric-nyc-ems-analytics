@@ -7,12 +7,12 @@ File:
     sql/03_response_performance_analysis.sql
 
 Business questions:
-    BQ05. How does response time vary by initial severity level?
-    BQ06. How does response performance differ across boroughs?
-    BQ07. Which areas have the greatest response-time variability?
-    BQ08. Do held incidents experience slower or more variable responses?
-    BQ09. How much response time is associated with dispatch and travel?
-    BQ10. Which periods experience high demand and slower response?
+    BQ05. How does EMS response time vary by initial severity level?
+    BQ06. How does EMS response performance differ across NYC boroughs?
+    BQ07. Which areas have the greatest variability in EMS response times?
+    BQ08. Do held incidents experience longer or more variable response times than incidents that are immediately assigned?
+    BQ09. How much of total incident response time is associated with dispatch delay versus travel time?
+    BQ10. Which periods experience both high EMS demand and slower response performance?
 
 Notes:
     Weighted averages use response-time totals and valid-record counts.
@@ -119,9 +119,9 @@ SELECT
                 CAST(total_incidents AS DECIMAL(20,8)),
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(7,2)
+        AS DECIMAL(20,6)
     ) AS valid_response_percentage,
 
     CAST(
@@ -166,9 +166,9 @@ SELECT
                 weighted_average_response_seconds,
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(12,2)
+        AS DECIMAL(20,6)
     ) AS response_cv_percentage
 
 FROM severity_statistics
@@ -260,9 +260,9 @@ SELECT
                 CAST(total_incidents AS DECIMAL(20,8)),
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(7,2)
+        AS DECIMAL(20,6)
     ) AS valid_response_percentage,
 
     CAST(
@@ -307,9 +307,9 @@ SELECT
                 weighted_average_response_seconds,
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(12,2)
+        AS DECIMAL(20,6)
     ) AS response_cv_percentage,
 
     RANK() OVER
@@ -461,9 +461,9 @@ SELECT
                 weighted_average_response_seconds,
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(12,2)
+        AS DECIMAL(20,6)
     ) AS response_cv_percentage,
 
     RANK() OVER
@@ -513,9 +513,9 @@ SELECT
                 ),
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(7,2)
+        AS DECIMAL(20,6)
     ) AS valid_response_percentage,
 
     CAST(
@@ -556,9 +556,9 @@ SELECT
                 ),
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(12,2)
+        AS DECIMAL(20,6)
     ) AS response_cv_percentage
 
 FROM dbo.gold_fact_ems_incident
@@ -642,9 +642,9 @@ SELECT
                 average_incident_response_seconds,
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(7,2)
+        AS DECIMAL(12,6)
     ) AS dispatch_share_percentage,
 
     CAST(
@@ -655,9 +655,9 @@ SELECT
                 average_incident_response_seconds,
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(7,2)
+        AS DECIMAL(12,6)
     ) AS travel_share_percentage,
 
     CAST(
@@ -970,9 +970,9 @@ SELECT
                 ),
                 0
             ) * 100,
-            2
+            6
         )
-        AS DECIMAL(7,2)
+        AS DECIMAL(12,6)
     ) AS anomaly_rate_percentage
 
 FROM dbo.gold_agg_daily_performance
