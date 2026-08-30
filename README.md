@@ -177,6 +177,21 @@ The fact table preserves the incident-level grain of one row per EMS incident an
 
 Gold validation confirmed that the fact-table row count matches the Silver table, incident identifiers remain unique, yearly row counts are preserved, and no orphan dimension keys were introduced.
 
+### Call Type Description Mapping
+
+`gold_dim_call_type` combines the initial and final EMS dispatch classifications observed in the incident data and enriches them with descriptions from the `Call Type Descriptions` worksheet in the official NYC EMS data-description workbook.
+
+The completed dimension contains:
+
+* 199 call-type codes observed in the incident data
+* 187 call types matched to an official description
+* 12 source call types retained as `UNDOCUMENTED CALL TYPE`
+* Separate indicators showing whether each call type appears as an initial classification, a final classification, or both
+
+Call-type codes are trimmed and converted to uppercase before matching. All source values are retained through a left join. Codes that do not appear in the official reference mapping are not removed and are not assigned inferred meanings.
+
+The 12 undocumented codes occur only as initial dispatch classifications in the current dataset. Missing source values, if introduced in future data, are represented by the controlled `UNKNOWN` member and kept separate from undocumented codes.
+
 ### Incident Disposition Mapping
 
 `gold_dim_disposition` enriches the source disposition codes using the official NYC EMS documentation while preserving every distinct code found in Silver.
@@ -223,6 +238,33 @@ The analytical measures include:
 Control limits are calculated separately for each borough and initial severity level using the previous 30 eligible daily observations. The current observation is excluded from its own historical baseline. A daily group requires at least 30 valid incident-response records, and at least 20 eligible historical observations are required before a reportable anomaly can be produced.
 
 The completed Gold audit confirmed that the dimensions are non-empty, fact identifiers are complete and unique, daily aggregated incident totals reconcile to the Gold fact table, the daily analytical grain contains no duplicates, and the control-limit and reportable-anomaly validations pass.
+
+## SQL Analytics Endpoint
+
+SQL Analytics Endpoint validation and analytical query development are complete. The SQL layer independently revalidates the persisted Gold tables and provides business-focused queries covering all 12 project questions.
+
+| SQL file | Coverage | Status |
+|---|---|---|
+| [`sql/01_gold_validation.sql`](sql/01_gold_validation.sql) | Gold table accessibility, row counts, identifiers, dimension keys, foreign keys, aggregate reconciliation, statistical measures, control limits, anomaly rules, audit status, and call-type description mapping | Completed |
+| [`sql/02_incident_demand_analysis.sql`](sql/02_incident_demand_analysis.sql) | Emergency demand analysis for BQ01–BQ04 | Completed |
+| [`sql/03_response_performance_analysis.sql`](sql/03_response_performance_analysis.sql) | Response performance and reliability analysis for BQ05–BQ10 | Completed |
+| [`sql/04_outcomes_classification_analysis.sql`](sql/04_outcomes_classification_analysis.sql) | Incident disposition and classification-change analysis for BQ11–BQ12 | Completed |
+
+The SQL validation layer confirms:
+
+* All Gold tables are accessible through the SQL Analytics Endpoint
+* The Gold fact table contains 10,881,496 unique incident records
+* All eight fact-table foreign keys are populated and have no orphan dimension keys
+* Daily aggregate incident totals reconcile to the Gold fact table
+* Daily analytical grain and dimension keys are unique
+* Response-time totals, averages, valid-record counts, and null rules are internally consistent
+* Seconds-to-minutes conversions follow the same decimal rounding rules as the Gold notebook
+* Rates, percentages, coefficient-of-variation measures, control limits, and anomaly flags pass validation
+* Every call type has a controlled description, while undocumented source codes remain visible
+
+Analytical percentages use decimal arithmetic and retain six decimal places where low-frequency categories would otherwise appear as zero. Response-time measures are displayed to two decimal places to avoid unsupported precision. Weighted averages and pooled statistical formulas are used where daily aggregates are combined across groups.
+
+The analytical queries cover demand trends, peak periods, borough patterns, call-type demand, response-time performance, variability, held incidents, response components, high-demand and slow-response periods, dispositions, call-type transitions, severity transitions, classification-change overlap, and annual outcome trends.
 
 ## Pipeline Notebooks
 
@@ -327,6 +369,7 @@ Business Insights and Recommendations
 * Business question definition
 * Gold dimensional model
 * Gold date, time, geography, call-type, severity, and disposition dimensions
+* Official call-type descriptions with undocumented source-code retention
 * Official disposition mapping with undocumented source-code retention
 * Gold incident fact table
 * Gold fact-table foreign-key and row-count validation
@@ -336,14 +379,16 @@ Business Insights and Recommendations
 * Statistical anomaly detection with sample-quality safeguards
 * Gold data-quality audit table
 * Pipeline validation evidence screenshots
+* SQL Analytics Endpoint Gold-layer validation
+* SQL analytical queries covering BQ01–BQ12
+* Decimal precision and seconds-to-minutes reconciliation across Notebook and SQL outputs
 
 ### In Progress
 
-* SQL Analytics Endpoint validation and analytical query development
+* Power BI semantic model development
 
 ### Next Steps
 
-* Develop SQL analytical queries
 * Build the Power BI semantic model
 * Create statistical DAX measures
 * Develop the Power BI dashboard
