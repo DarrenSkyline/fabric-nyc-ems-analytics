@@ -19,7 +19,7 @@ The project demonstrates:
 * Population standard deviation
 * Upper and lower statistical control limits
 * Anomaly detection
-* Time-series analysis and forecasting
+* Time-series analysis and forecasting preparation
 * Business-focused data storytelling
 
 ## Dataset
@@ -266,6 +266,34 @@ Analytical percentages use decimal arithmetic and retain six decimal places wher
 
 The analytical queries cover demand trends, peak periods, borough patterns, call-type demand, response-time performance, variability, held incidents, response components, high-demand and slow-response periods, dispositions, call-type transitions, severity transitions, classification-change overlap, and annual outcome trends.
 
+## Power BI Semantic Model and DAX
+
+The completed Power BI semantic model uses a star-schema design over the Gold tables. It contains the six conformed dimensions, the incident-level fact table, the daily performance aggregate, and a dedicated `_Measures` table for explicit DAX measures.
+
+The model contains ten one-to-many, single-direction relationships. Date, time, geography, disposition, initial call type, and initial severity filter `gold_fact_ems_incident` through active relationships. Final call type and final severity are retained as inactive role-playing relationships. Date and initial severity also filter `gold_agg_daily_performance` through active relationships.
+
+Final-classification measures use `USERELATIONSHIP()` to activate the required final relationship and `CROSSFILTER(..., NONE)` to disable the corresponding active initial relationship. This prevents a call-type or severity selection from filtering the incident fact through both roles simultaneously.
+
+`gold_dim_date` is marked as the Date table using `full_date`. User-facing labels use dedicated numeric sort columns. Surrogate keys, foreign keys, technical fields, unsupported implicit aggregations, and intermediate calculation measures are hidden from report consumers.
+
+Explicit DAX measures are organised into display folders for Core KPIs, Response Performance, Reliability, Demand, Outcomes, Classification, and Data Quality. They support all 12 business questions and include:
+
+* Total incidents, valid-response coverage, and weighted response-time averages
+* Dispatch-delay and travel-time contribution using a common valid-event sample
+* Population standard deviation, P90, P95, and coefficient of variation
+* Held-versus-non-held response-time and variability comparisons
+* Year-over-year demand change, average daily incidents, and peak daily demand
+* Demand percentages by weekday, hour, time of day, borough, and initial call type
+* Dynamic high-demand and slow-response identification using a selected-period P75 demand threshold
+* Disposition counts, percentages, and transport/non-transport measures
+* Initial-to-final call-type and severity change rates
+* Final call-type and final-severity distributions through inactive relationships
+* Statistical centre-line, control-limit, and reportable-anomaly measures
+
+Ratios and averages are recalculated in the current filter context rather than summed across displayed rows. Response-time averages use valid-event counts as weights. Low-frequency call-type percentages retain additional decimal precision so valid small categories do not appear as zero.
+
+A dedicated hidden QA report page validates core totals, filter propagation, role-playing relationships, percentage reconciliation, ranking behaviour, response-component reconciliation, control-limit availability, and high-demand/slow-response logic. The unfiltered incident total reconciles to 10,881,496 throughout the semantic model.
+
 ## Pipeline Notebooks
 
 | Notebook | Purpose | Status |
@@ -310,7 +338,31 @@ The Gold analytics validation confirms fact-to-aggregate reconciliation, daily-g
 
 ![Gold analytics and audit validation](screenshots/06_gold_analytics_validation.png)
 
-The Gold star-schema relationship diagram will be added after the Power BI semantic model has been created.
+### Power BI Semantic Model
+
+The Power BI semantic model connects the incident fact and daily analytical
+table to conformed Date, Time, Geography, Call Type, Severity, and Disposition
+dimensions.
+
+Initial call type and initial severity relationships are active by default.
+Final call type and final severity relationships are retained as inactive
+role-playing relationships and can be activated in DAX using
+`USERELATIONSHIP()`.
+
+All relationships use one-to-many cardinality and single-direction filtering
+from dimensions to fact tables.
+
+![Power BI semantic model relationships](screenshots/07_semantic_model_relationships.png)
+
+The relationship-management view records relationship cardinality, filter direction, and active/inactive status.
+
+![Power BI relationship settings](screenshots/08_semantic_model_relationship_settings.png)
+
+### DAX and Semantic Model QA
+
+The hidden QA page validates core totals, weighted measures, percentages, role-playing relationships, rankings, response-component reconciliation, and time-intelligence behaviour before formal report development.
+
+![Power BI semantic model and DAX validation](screenshots/09_semantic_model_measure_validation.png)
 
 ## Analytics Workflow
 
@@ -382,15 +434,22 @@ Business Insights and Recommendations
 * SQL Analytics Endpoint Gold-layer validation
 * SQL analytical queries covering BQ01–BQ12
 * Decimal precision and seconds-to-minutes reconciliation across Notebook and SQL outputs
+* Power BI semantic model and star-schema relationships
+* Active and inactive role-playing call-type and severity relationships
+* Dedicated `_Measures` table with organised display folders
+* DAX measures covering BQ01–BQ12
+* Weighted response-time, reliability, percentile, and coefficient-of-variation measures
+* Control-limit and reportable-anomaly measures
+* Semantic-model and DAX QA report page
 
 ### In Progress
 
-* Power BI semantic model development
+* Power BI report development
 
 ### Next Steps
 
-* Build the Power BI semantic model
-* Create statistical DAX measures
-* Develop the Power BI dashboard
+* Build the executive-overview report page
+* Develop emergency-demand, response-performance, reliability, and outcomes pages
+* Apply consistent report formatting, navigation, tooltips, and interactions
 * Add time-series forecasting and projection visuals
 * Document findings and business recommendations
