@@ -1,0 +1,71 @@
+table gold_dim_time
+	lineageTag: cc2d2c1e-7625-4275-b0f3-e2b58b36650d
+	sourceLineageTag: [dbo].[gold_dim_time]
+
+	column time_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6ccb96e5-c9cd-40c5-8c61-1cbaf8f2d093
+		sourceLineageTag: time_key
+		summarizeBy: none
+		sourceColumn: time_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 78681c8d-ba65-41ef-9ca4-7f55d110b8c3
+		sourceLineageTag: hour_number
+		summarizeBy: none
+		sourceColumn: hour_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_label
+		dataType: string
+		lineageTag: 1ced8682-ae9f-428d-a6b8-cc95037c82d6
+		sourceLineageTag: hour_label
+		summarizeBy: none
+		sourceColumn: hour_label
+		sortByColumn: hour_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_of_day
+		dataType: string
+		lineageTag: b1e4009a-55f1-4f36-b23e-b14384b6c10a
+		sourceLineageTag: time_of_day
+		summarizeBy: none
+		sourceColumn: time_of_day
+		sortByColumn: time_of_day_sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_of_day_sort
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f7dbf4cc-05ef-4229-bdd3-750c7d4740ab
+		sourceLineageTag: time_of_day_sort
+		summarizeBy: none
+		sourceColumn: time_of_day_sort
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_time = entity
+		mode: directLake
+		source
+			entityName: gold_dim_time
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

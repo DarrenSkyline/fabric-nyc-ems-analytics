@@ -1,0 +1,74 @@
+table gold_dim_severity
+	lineageTag: c58178b5-fd8a-4fc9-bbce-defc41fac74b
+	sourceLineageTag: [dbo].[gold_dim_severity]
+
+	column severity_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 07c8041b-63da-4bb5-8962-ee1989acc954
+		sourceLineageTag: severity_key
+		summarizeBy: none
+		sourceColumn: severity_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity_level_code
+		dataType: int64
+		formatString: 0
+		lineageTag: 085dae06-31cf-4780-845d-0ff241e00c54
+		sourceLineageTag: severity_level_code
+		summarizeBy: none
+		sourceColumn: severity_level_code
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column severity_label
+		dataType: string
+		lineageTag: 4186e2dd-5ed5-4efc-93b5-5939f8a47b83
+		sourceLineageTag: severity_label
+		summarizeBy: none
+		sourceColumn: severity_label
+		sortByColumn: severity_level_code
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column appears_as_initial
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 273773d8-2f12-467e-9aca-2d7f0a21b2c7
+		sourceLineageTag: appears_as_initial
+		summarizeBy: none
+		sourceColumn: appears_as_initial
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column appears_as_final
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6fd123ee-b9d3-43b7-9a1d-5311de916c07
+		sourceLineageTag: appears_as_final
+		summarizeBy: none
+		sourceColumn: appears_as_final
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_severity = entity
+		mode: directLake
+		source
+			entityName: gold_dim_severity
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

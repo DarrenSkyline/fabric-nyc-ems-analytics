@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "bee2711fc563561e86b3",
+  "position": {
+    "x": 30,
+    "y": 45,
+    "z": 2000,
+    "height": 23,
+    "width": 650,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Demand patterns across time, geography and dispatch call type",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#dce6f0"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

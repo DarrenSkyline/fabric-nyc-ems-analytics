@@ -1,0 +1,42 @@
+relationship a31c942e-183a-b69f-5a2a-e0751b359d47
+	fromColumn: gold_fact_ems_incident.date_key
+	toColumn: gold_dim_date.date_key
+
+relationship 077f1ec6-140e-407c-1e75-75d6043683d4
+	fromColumn: gold_fact_ems_incident.time_key
+	toColumn: gold_dim_time.time_key
+
+relationship 5c605084-f09d-3f2f-d3a5-973086abd4fd
+	fromColumn: gold_fact_ems_incident.geography_key
+	toColumn: gold_dim_geography.geography_key
+
+relationship a4d167de-791c-1594-7706-19c3fdc50593
+	fromColumn: gold_fact_ems_incident.initial_call_type_key
+	toColumn: gold_dim_call_type.call_type_key
+
+relationship 0010bcfa-9c54-f90e-8c6d-7dade93e6faa
+	isActive: false
+	fromColumn: gold_fact_ems_incident.final_call_type_key
+	toColumn: gold_dim_call_type.call_type_key
+
+relationship 9864135d-db6c-a475-1225-b6a568fee575
+	fromColumn: gold_fact_ems_incident.initial_severity_key
+	toColumn: gold_dim_severity.severity_key
+
+relationship a007bcef-552e-3226-3815-41f210a5b8c2
+	isActive: false
+	fromColumn: gold_fact_ems_incident.final_severity_key
+	toColumn: gold_dim_severity.severity_key
+
+relationship 01e582e6-88ef-5a0b-9ec2-3429bbf537f3
+	fromColumn: gold_fact_ems_incident.disposition_key
+	toColumn: gold_dim_disposition.disposition_key
+
+relationship ec8f1648-79c9-8592-3166-52068ad3e864
+	fromColumn: gold_agg_daily_performance.date_key
+	toColumn: gold_dim_date.date_key
+
+relationship 777d014e-be81-3705-57a9-70b288c94351
+	fromColumn: gold_agg_daily_performance.initial_severity_key
+	toColumn: gold_dim_severity.severity_key
+

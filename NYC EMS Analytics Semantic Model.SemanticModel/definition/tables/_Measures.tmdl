@@ -1,0 +1,1003 @@
+table _Measures
+	lineageTag: 29b5e698-69b9-4450-836a-1823f96a1728
+
+	measure 'Total Incidents' =
+			
+			SUM ( gold_fact_ems_incident[incident_count] )
+		formatString: #,0
+		displayFolder: 01 Core KPIs
+		lineageTag: 86211f7e-c092-4175-8126-de96ab089612
+
+	measure 'Valid Incident Response Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_fact_ems_incident[is_valid_incident_response] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 01 Core KPIs
+		lineageTag: 13f4f8d1-c1a7-4bfd-bf50-0329e4cd05a1
+
+	measure 'Valid Incident Response Percentage' =
+			
+			DIVIDE (
+			    [Valid Incident Response Incidents],
+			    [Total Incidents]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 01 Core KPIs
+		lineageTag: c22d442a-474a-4d9f-a11d-e932becc94cf
+
+	measure 'Valid Dispatch Response Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_fact_ems_incident[is_valid_dispatch_response] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 01 Core KPIs
+		lineageTag: fbb80218-3eee-4052-88c8-fc679b893ae7
+
+	measure 'Total Incident Response Seconds' =
+			
+			SUM (
+			    gold_fact_ems_incident[valid_incident_response_seconds]
+			)
+		formatString: #,0.00
+		isHidden
+		displayFolder: 02 Response Performance
+		lineageTag: 1a39d58e-5d0b-497a-af29-6cf0d4225e52
+
+	measure 'Average Incident Response Minutes' =
+			
+			DIVIDE (
+			    [Total Incident Response Seconds],
+			    [Valid Incident Response Incidents] * 60.0
+			)
+		formatString: 0.00
+		displayFolder: 02 Response Performance
+		lineageTag: 78759529-7345-4ab4-80e3-b6f18c6122c9
+
+	measure 'Total Dispatch Response Seconds' =
+			
+			SUM (
+			    gold_fact_ems_incident[valid_dispatch_response_seconds]
+			)
+		formatString: #,0.00
+		isHidden
+		displayFolder: 02 Response Performance
+		lineageTag: 8636e522-9952-4a30-ae6b-b41202e16afe
+
+	measure 'Average Dispatch Response Minutes' =
+			
+			DIVIDE (
+			    [Total Dispatch Response Seconds],
+			    [Valid Dispatch Response Incidents] * 60.0
+			)
+		formatString: 0.00
+		displayFolder: 02 Response Performance
+		lineageTag: 6d272dc4-87d6-48d0-97c2-277a314cf456
+
+	measure 'Valid Travel Time Incidents' =
+			
+			COUNT (
+			    gold_fact_ems_incident[valid_travel_time_seconds]
+			)
+		formatString: #,0
+		displayFolder: 01 Core KPIs
+		lineageTag: d55a495a-7c6e-4b6e-9943-cd1591f01609
+
+	measure 'Total Travel Time Seconds' =
+			
+			SUM (
+			    gold_fact_ems_incident[valid_travel_time_seconds]
+			)
+		formatString: #,0.00
+		isHidden
+		displayFolder: 02 Response Performance
+		lineageTag: 545bbad7-194e-4390-a5e5-3c6f973332c6
+
+	measure 'Average Travel Time Minutes' =
+			
+			DIVIDE (
+			    [Total Travel Time Seconds],
+			    [Valid Travel Time Incidents] * 60.0
+			)
+		formatString: 0.00
+		displayFolder: 02 Response Performance
+		lineageTag: 97d9eee6-0331-4743-8dfb-756a53e8f7ee
+
+	measure 'Dispatch Time Share Percentage' =
+			
+			DIVIDE (
+			    [Complete Sample Dispatch Seconds],
+			    [Complete Sample Incident Response Seconds]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 02 Response Performance\Components
+		lineageTag: 878c277c-294f-4c89-b95e-07f1da2344d7
+
+	measure 'Travel Time Share Percentage' =
+			
+			DIVIDE (
+			    [Complete Sample Travel Seconds],
+			    [Complete Sample Incident Response Seconds]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 02 Response Performance\Components
+		lineageTag: 965c3fbc-7221-4889-bfd4-53a4e4d561a7
+
+	measure 'Complete Response Component Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_fact_ems_incident[valid_dispatch_response_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_travel_time_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_incident_response_seconds] <> BLANK ()
+			)
+		formatString: #,0
+		displayFolder: 02 Response Performance\Components
+		lineageTag: fc4fbc37-2f7e-4f14-8a0c-0251e7d956a0
+
+	measure 'Complete Sample Dispatch Seconds' =
+			
+			CALCULATE (
+			    SUM (
+			        gold_fact_ems_incident[valid_dispatch_response_seconds]
+			    ),
+			    gold_fact_ems_incident[valid_dispatch_response_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_travel_time_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_incident_response_seconds] <> BLANK ()
+			)
+		formatString: 0.00
+		isHidden
+		displayFolder: 02 Response Performance\Components
+		lineageTag: 84e628e6-0fc4-4bf3-9e51-1a230e199433
+
+	measure 'Complete Sample Travel Seconds' =
+			
+			CALCULATE (
+			    SUM (
+			        gold_fact_ems_incident[valid_travel_time_seconds]
+			    ),
+			    gold_fact_ems_incident[valid_dispatch_response_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_travel_time_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_incident_response_seconds] <> BLANK ()
+			)
+		formatString: 0.00
+		isHidden
+		displayFolder: 02 Response Performance\Components
+		lineageTag: d2738626-eb30-49e1-86d8-67f1910f50d4
+
+	measure 'Complete Sample Incident Response Seconds' =
+			
+			CALCULATE (
+			    SUM (
+			        gold_fact_ems_incident[valid_incident_response_seconds]
+			    ),
+			    gold_fact_ems_incident[valid_dispatch_response_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_travel_time_seconds] <> BLANK (),
+			    gold_fact_ems_incident[valid_incident_response_seconds] <> BLANK ()
+			)
+		formatString: 0.00
+		isHidden
+		displayFolder: 02 Response Performance\Components
+		lineageTag: c45005b8-19f0-40ac-a3e6-32de019b4d34
+
+	measure 'Response Component Difference Seconds' = ```
+			
+			    [Complete Sample Incident Response Seconds]
+			        - [Complete Sample Dispatch Seconds]
+			        - [Complete Sample Travel Seconds]
+			```
+		formatString: 0.00
+		isHidden
+		displayFolder: 07 Data Quality
+		lineageTag: 51c4209d-4efd-44bd-9819-c15ab65cdb34
+
+	measure 'Response Component Share Total' = ```
+			
+			    [Dispatch Time Share Percentage]
+			        + [Travel Time Share Percentage]
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		isHidden
+		displayFolder: 07 Data Quality
+		lineageTag: ab9e7874-22d2-4d8f-b76a-5aaa2c62c7f9
+
+	measure 'Population Std Dev Response Minutes' =
+			
+			VAR ValidResponses =
+			    FILTER (
+			        gold_fact_ems_incident,
+			        NOT ISBLANK (
+			            gold_fact_ems_incident[valid_incident_response_seconds]
+			        )
+			    )
+			RETURN
+			    STDEVX.P (
+			        ValidResponses,
+			        gold_fact_ems_incident[valid_incident_response_seconds] / 60.0
+			    )
+		formatString: 0.00
+		displayFolder: 03 Reliability\Distribution
+		lineageTag: 29f01b94-45d5-46bf-a954-11a1c0061529
+
+	measure 'Response CV Percentage' =
+			
+			DIVIDE (
+			    [Population Std Dev Response Minutes],
+			    [Average Incident Response Minutes]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 03 Reliability\Distribution
+		lineageTag: bfea230d-a099-4084-9e29-e922329a6163
+
+	measure 'P90 Response Minutes' =
+			
+			VAR ValidResponses =
+			    FILTER (
+			        gold_fact_ems_incident,
+			        NOT ISBLANK (
+			            gold_fact_ems_incident[valid_incident_response_seconds]
+			        )
+			    )
+			RETURN
+			    PERCENTILEX.INC (
+			        ValidResponses,
+			        gold_fact_ems_incident[valid_incident_response_seconds] / 60.0,
+			        0.90
+			    )
+		formatString: 0.00
+		displayFolder: 03 Reliability\Distribution
+		lineageTag: 696b01dd-e6bb-4fe6-8357-b6f3e7697854
+
+	measure 'P95 Response Minutes' =
+			
+			VAR ValidResponses =
+			    FILTER (
+			        gold_fact_ems_incident,
+			        NOT ISBLANK (
+			            gold_fact_ems_incident[valid_incident_response_seconds]
+			        )
+			    )
+			RETURN
+			    PERCENTILEX.INC (
+			        ValidResponses,
+			        gold_fact_ems_incident[valid_incident_response_seconds] / 60.0,
+			        0.95
+			    )
+		formatString: 0.00
+		displayFolder: 03 Reliability\Distribution
+		lineageTag: 2cfa9de0-d5ab-4d94-ae9b-945fc207c969
+
+	measure 'Held Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_fact_ems_incident[is_held] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: 50f6941c-a234-483f-bbd1-e1d3df82840c
+
+	measure 'Held Incident Percentage' =
+			
+			DIVIDE (
+			    [Held Incidents],
+			    [Total Incidents]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: ac72d15a-cd14-43c4-9b78-bb9fc61ce307
+
+	measure 'Average Held Response Minutes' =
+			
+			CALCULATE (
+			    [Average Incident Response Minutes],
+			    gold_fact_ems_incident[is_held] = TRUE ()
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: c468d3fc-94d0-4370-b748-9988dd647007
+
+	measure 'Average Non-Held Response Minutes' =
+			
+			CALCULATE (
+			    [Average Incident Response Minutes],
+			    gold_fact_ems_incident[is_held] = FALSE ()
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: e24260df-2b72-4159-931c-4aa234abaf79
+
+	measure 'Held Response Difference Minutes' = ```
+			
+			    [Average Held Response Minutes]
+			        - [Average Non-Held Response Minutes]
+			```
+		formatString: 0.00
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: 1181baeb-acae-4739-b938-4aadad4f9361
+
+	measure 'Held Response Difference Percentage' =
+			
+			DIVIDE (
+			    [Held Response Difference Minutes],
+			    [Average Non-Held Response Minutes]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: f4ad985d-a070-4a03-9b21-1cd9a174293f
+
+	measure 'Held Response Std Dev Minutes' =
+			
+			CALCULATE (
+			    [Population Std Dev Response Minutes],
+			    gold_fact_ems_incident[is_held] = TRUE ()
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: 035ba773-77a7-4023-9e5c-5c33cfe9843b
+
+	measure 'Non-Held Response Std Dev Minutes' =
+			
+			CALCULATE (
+			    [Population Std Dev Response Minutes],
+			    gold_fact_ems_incident[is_held] = FALSE ()
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Held Incidents
+		lineageTag: 5ac3d3e5-deb4-4c93-854a-4f0f133c1fbc
+
+	measure 'Incidents Previous Year' =
+			
+			IF (
+			    HASONEVALUE (
+			        gold_dim_date[year]
+			    ),
+			    CALCULATE (
+			        [Total Incidents],
+			        DATEADD (
+			            gold_dim_date[full_date],
+			            -1,
+			            YEAR
+			        )
+			    )
+			)
+		formatString: #,0
+		displayFolder: 04 Demand\Time Trends
+		lineageTag: bad7e02b-1dc1-435f-b8c0-cc37146b667c
+
+	measure 'Incident YoY Change' =
+			
+			VAR CurrentIncidents =
+			    [Total Incidents]
+			VAR PreviousIncidents =
+			    [Incidents Previous Year]
+			RETURN
+			    IF (
+			        HASONEVALUE (
+			            gold_dim_date[year]
+			        )
+			            && NOT ISBLANK ( PreviousIncidents ),
+			        CurrentIncidents - PreviousIncidents,
+			        BLANK ()
+			    )
+		formatString: #,0
+		displayFolder: 04 Demand\Time Trends
+		lineageTag: 61bca536-9c8c-4052-a262-be2000780436
+
+	measure 'Incident YoY Change Percentage' =
+			
+			VAR PreviousIncidents =
+			    [Incidents Previous Year]
+			RETURN
+			    IF (
+			        HASONEVALUE (
+			            gold_dim_date[year]
+			        )
+			            && NOT ISBLANK ( PreviousIncidents ),
+			        DIVIDE (
+			            [Total Incidents] - PreviousIncidents,
+			            PreviousIncidents
+			        ),
+			        BLANK ()
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 04 Demand\Time Trends
+		lineageTag: 4601a351-a8a6-4ec1-8522-9390723167d6
+
+	measure 'Selected Calendar Days' =
+			
+			COUNTROWS (
+			    VALUES (
+			        gold_dim_date[full_date]
+			    )
+			)
+		formatString: 0
+		isHidden
+		displayFolder: 04 Demand\Supporting Measures
+		lineageTag: 3f04304b-3653-42aa-a979-52cfb3d92a58
+
+	measure 'Average Daily Incidents' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    [Selected Calendar Days]
+			)
+		formatString: #,0.00
+		displayFolder: 04 Demand\Daily Demand
+		lineageTag: b3cf4075-d6b3-4d30-a8af-d6ebb164fb2b
+
+	measure 'Peak Daily Incidents' =
+			
+			MAXX (
+			    VALUES (
+			        gold_dim_date[full_date]
+			    ),
+			    CALCULATE (
+			        [Total Incidents]
+			    )
+			)
+		formatString: #,0
+		displayFolder: 04 Demand\Daily Demand
+		lineageTag: 0bc0e2c6-942a-4b3f-b94a-5f1ad2e2c5fe
+
+	measure 'Day of Week Incident Percentage' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    CALCULATE (
+			        [Total Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_date[day_of_week_name],
+			            gold_dim_date[day_of_week_short_name],
+			            gold_dim_date[day_of_week_number]
+			        )
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 04 Demand\Demand Distribution
+		lineageTag: 239f7383-f3ba-42b0-95fa-e8b4deecee06
+
+	measure 'Hour Incident Percentage' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    CALCULATE (
+			        [Total Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_time
+			        )
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 04 Demand\Demand Distribution
+		lineageTag: a57be10a-6554-4861-93f7-3132384d6b18
+
+	measure 'Time of Day Incident Percentage' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    CALCULATE (
+			        [Total Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_time
+			        )
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 04 Demand\Demand Distribution
+		lineageTag: 46b6c69f-7005-43ef-ab81-9fc7610b0140
+
+	measure 'Borough Incident Percentage' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    CALCULATE (
+			        [Total Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_geography
+			        )
+			    )
+			)
+		formatString: 0.0000%;-0.0000%;0.0000%
+		displayFolder: 04 Demand\Geography
+		lineageTag: 63ce56ba-23d7-4d6b-962b-41655735d2d1
+
+	measure 'Initial Call Type Incident Percentage' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    CALCULATE (
+			        [Total Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_call_type
+			        )
+			    )
+			)
+		formatString: 0.00000%;-0.00000%;0.00000%
+		displayFolder: 04 Demand\Call Types
+		lineageTag: 67404073-4223-4804-a3e3-3a9943b3764e
+
+	measure 'Initial Call Type Rank' =
+			
+			VAR CurrentInitialCallTypeIncidents =
+			    [Total Incidents]
+			RETURN
+			    IF (
+			        NOT ISINSCOPE (
+			            gold_dim_call_type[call_type]
+			        )
+			            || ISBLANK ( CurrentInitialCallTypeIncidents ),
+			        BLANK (),
+			        RANKX (
+			            ALLSELECTED (
+			                gold_dim_call_type[call_type]
+			            ),
+			            CALCULATE (
+			                [Total Incidents],
+			                REMOVEFILTERS (
+			                    gold_dim_call_type[call_type_description]
+			                )
+			            ),
+			            CurrentInitialCallTypeIncidents,
+			            DESC,
+			            DENSE
+			        )
+			    )
+		formatString: 0
+		displayFolder: 04 Demand\Call Types
+		lineageTag: fbf0495c-b2bd-455c-84d7-395bf29cffe0
+
+	measure 'Disposition Incident Percentage' =
+			
+			DIVIDE (
+			    [Total Incidents],
+			    CALCULATE (
+			        [Total Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_disposition
+			        )
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 05 Outcomes\Disposition
+		lineageTag: d6b9ce48-09f3-4ac4-b419-d50dd09e5f60
+
+	measure 'Transported Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_dim_disposition[disposition_category] = "Transported"
+			)
+		formatString: #,0
+		displayFolder: 05 Outcomes\Disposition
+		lineageTag: a3aa877b-d861-4548-92d6-67e876fc3f70
+
+	measure 'Transported Incident Percentage' =
+			
+			DIVIDE (
+			    [Transported Incidents],
+			    [Total Incidents]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 05 Outcomes\Disposition
+		lineageTag: 980d920b-16fe-498d-9599-042c4515e7c9
+
+	measure 'Not Transported Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_dim_disposition[disposition_category] = "Not Transported"
+			)
+		formatString: #,0
+		displayFolder: 05 Outcomes\Disposition
+		lineageTag: 0cb93d7f-8822-472c-b170-eac826259ad5
+
+	measure 'Not Transported Percentage' =
+			
+			DIVIDE (
+			    [Not Transported Incidents],
+			    [Total Incidents]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 05 Outcomes\Disposition
+		lineageTag: cab4eaf1-b189-4a6c-8945-b09ab39d2c21
+
+	measure 'Call Type Changed Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_fact_ems_incident[call_type_changed] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 06 Classification\Call Type
+		lineageTag: 4ac4f1f6-4916-4e6d-adc6-54060d5f9655
+
+	measure 'Call Type Change Percentage' =
+			
+			DIVIDE (
+			    [Call Type Changed Incidents],
+			    [Total Incidents]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 06 Classification\Call Type
+		lineageTag: 7590f6ef-6555-4a30-bc41-d649f4455960
+
+	measure 'Severity Changed Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    gold_fact_ems_incident[severity_changed] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 06 Classification\Severity
+		lineageTag: 11aa9e5a-7572-41ae-84bc-34c12b3d4360
+
+	measure 'Severity Change Percentage' =
+			
+			DIVIDE (
+			    [Severity Changed Incidents],
+			    [Total Incidents]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 06 Classification\Severity
+		lineageTag: e01b68ae-f4f5-4bd9-9e62-abaed7b63a64
+
+	measure 'Final Call Type Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    CROSSFILTER (
+			        gold_fact_ems_incident[initial_call_type_key],
+			        gold_dim_call_type[call_type_key],
+			        NONE
+			    ),
+			    USERELATIONSHIP (
+			        gold_fact_ems_incident[final_call_type_key],
+			        gold_dim_call_type[call_type_key]
+			    )
+			)
+		formatString: #,0
+		displayFolder: 06 Classification\Call Type
+		lineageTag: 6ec88a4e-4509-4545-9f0b-959f1c425a7c
+
+	measure 'Final Severity Incidents' =
+			
+			CALCULATE (
+			    [Total Incidents],
+			    CROSSFILTER (
+			        gold_fact_ems_incident[initial_severity_key],
+			        gold_dim_severity[severity_key],
+			        NONE
+			    ),
+			    USERELATIONSHIP (
+			        gold_fact_ems_incident[final_severity_key],
+			        gold_dim_severity[severity_key]
+			    )
+			)
+		formatString: #,0
+		displayFolder: 06 Classification\Severity
+		lineageTag: 6964ef64-4b13-44c3-aac6-f1953c7038a4
+
+	measure 'Final Call Type Incident Percentage' =
+			
+			DIVIDE (
+			    [Final Call Type Incidents],
+			    CALCULATE (
+			        [Final Call Type Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_call_type
+			        )
+			    )
+			)
+		formatString: 0.00000%;-0.00000%;0.00000%
+		displayFolder: 06 Classification\Call Type
+		lineageTag: 9619be61-0734-470b-aa3a-2dd07afa73bc
+
+	measure 'Final Severity Incident Percentage' =
+			
+			DIVIDE (
+			    [Final Severity Incidents],
+			    CALCULATE (
+			        [Final Severity Incidents],
+			        REMOVEFILTERS (
+			            gold_dim_severity
+			        )
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 06 Classification\Severity
+		lineageTag: c80f5808-a4f9-49ea-8040-6a63d7147cf9
+
+	measure 'Final Call Type Rank' =
+			
+			VAR CurrentFinalCallTypeIncidents =
+			    [Final Call Type Incidents]
+			RETURN
+			    IF (
+			        NOT ISINSCOPE (
+			            gold_dim_call_type[call_type]
+			        )
+			            || ISBLANK ( CurrentFinalCallTypeIncidents ),
+			        BLANK (),
+			        RANKX (
+			            ALLSELECTED (
+			                gold_dim_call_type[call_type],
+			                gold_dim_call_type[call_type_description]
+			            ),
+			            [Final Call Type Incidents],
+			            CurrentFinalCallTypeIncidents,
+			            DESC,
+			            DENSE
+			        )
+			    )
+		formatString: 0
+		displayFolder: 06 Classification\Call Type
+		lineageTag: 43d80f69-8074-47e4-adc4-d68bdcdfca78
+
+	measure 'Final Severity Rank' =
+			
+			VAR CurrentSeverityIncidents =
+			    [Final Severity Incidents]
+			RETURN
+			    IF (
+			        NOT ISINSCOPE (
+			            gold_dim_severity[severity_label]
+			        )
+			            || ISBLANK ( CurrentSeverityIncidents ),
+			        BLANK (),
+			        RANKX (
+			            ALLSELECTED (
+			                gold_dim_severity[severity_label],
+			                gold_dim_severity[severity_level_code]
+			            ),
+			            [Final Severity Incidents],
+			            CurrentSeverityIncidents,
+			            DESC,
+			            DENSE
+			        )
+			    )
+		formatString: 0
+		displayFolder: 06 Classification\Severity
+		lineageTag: f18464fb-68e7-477e-b428-adf78768a9d0
+
+	measure 'Analyzable Daily Performance Groups' =
+			
+			CALCULATE (
+			    COUNTROWS (
+			        gold_agg_daily_performance
+			    ),
+			    gold_agg_daily_performance[has_sufficient_sample] = TRUE (),
+			    gold_agg_daily_performance[has_sufficient_baseline] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 7ff4c806-7465-48b9-9da3-740cde425a9e
+
+	measure 'Reportable Response Anomaly Groups' =
+			
+			CALCULATE (
+			    COUNTROWS (
+			        gold_agg_daily_performance
+			    ),
+			    gold_agg_daily_performance[is_reportable_response_anomaly] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 827b5343-7ce0-49e5-9211-af19cf1358f1
+
+	measure 'Reportable Anomaly Percentage' =
+			
+			DIVIDE (
+			    [Reportable Response Anomaly Groups],
+			    [Analyzable Daily Performance Groups]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 5dab1348-f5d6-4f1f-9be7-368e5b07ecc7
+
+	measure 'Above Upper Control Limit Groups' =
+			
+			CALCULATE (
+			    COUNTROWS (
+			        gold_agg_daily_performance
+			    ),
+			    gold_agg_daily_performance[is_reportable_response_anomaly] = TRUE (),
+			    gold_agg_daily_performance[is_above_upper_control_limit] = TRUE ()
+			)
+		formatString: 0
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: a3007505-5ffc-4c7d-be39-7aea9d9442bf
+
+	measure 'Below Lower Control Limit Groups' =
+			
+			CALCULATE (
+			    COUNTROWS (
+			        gold_agg_daily_performance
+			    ),
+			    gold_agg_daily_performance[is_reportable_response_anomaly] = TRUE (),
+			    gold_agg_daily_performance[is_below_lower_control_limit] = TRUE ()
+			)
+		formatString: 0
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: fc6b5733-ae0a-4516-b6de-c5c1d4a4fa6c
+
+	measure 'Daily Performance Average Response Minutes' =
+			
+			DIVIDE (
+			    SUM (
+			        gold_agg_daily_performance[total_incident_response_seconds]
+			    ),
+			    SUM (
+			        gold_agg_daily_performance[valid_incident_response_count]
+			    ) * 60.0
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: ab462c38-5ef4-46bd-bca7-39fc23383eba
+
+	measure 'Response Center Line Minutes' =
+			
+			SELECTEDVALUE (
+			    gold_agg_daily_performance[response_center_line_minutes]
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 68f2a24e-3604-4d2e-9096-5b1201af1c4b
+
+	measure 'Upper Control Limit Minutes' =
+			
+			SELECTEDVALUE (
+			    gold_agg_daily_performance[upper_control_limit_minutes]
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 0bff0e72-0d21-4b8a-8db4-da186eb9ed97
+
+	measure 'Lower Control Limit Minutes' =
+			
+			SELECTEDVALUE (
+			    gold_agg_daily_performance[lower_control_limit_minutes]
+			)
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 41c988a9-1fa3-44de-8b1a-7fc45cf0cdd4
+
+	measure 'Daily Aggregate Incidents' =
+			
+			SUM (
+			    gold_agg_daily_performance[total_incidents]
+			)
+		formatString: #,0
+		displayFolder: 04 Demand\Demand and Response
+		lineageTag: 907b8d76-eed4-4c07-b41f-da88bc5babeb
+
+	measure 'P75 Daily Demand Threshold' =
+			
+			PERCENTILEX.INC (
+			    ALLSELECTED (
+			        gold_dim_date[full_date]
+			    ),
+			    CALCULATE (
+			        [Daily Aggregate Incidents]
+			    ),
+			    0.75
+			)
+		formatString: #,0.00
+		isHidden
+		displayFolder: 04 Demand\Demand and Response
+		lineageTag: a150540a-38d1-429f-a814-8e2dbdb51d46
+
+	measure 'Selected Period Average Response Minutes' =
+			
+			AVERAGEX (
+			    ALLSELECTED (
+			        gold_dim_date[full_date]
+			    ),
+			    CALCULATE (
+			        [Daily Performance Average Response Minutes]
+			    )
+			)
+		formatString: 0.00
+		isHidden
+		displayFolder: 04 Demand\Demand and Response
+		lineageTag: c49a4b48-debc-4254-a404-8e237f29f682
+
+	measure 'High Demand Slow Response Flag' =
+			
+			VAR CurrentDailyDemand =
+			    [Daily Aggregate Incidents]
+			VAR CurrentDailyResponse =
+			    [Daily Performance Average Response Minutes]
+			VAR HighDemandThreshold =
+			    [P75 Daily Demand Threshold]
+			VAR SlowResponseThreshold =
+			    [Selected Period Average Response Minutes]
+			RETURN
+			    IF (
+			        NOT ISINSCOPE (
+			            gold_dim_date[full_date]
+			        ),
+			        BLANK (),
+			        IF (
+			            NOT ISBLANK ( CurrentDailyDemand )
+			                && NOT ISBLANK ( CurrentDailyResponse )
+			                && CurrentDailyDemand >= HighDemandThreshold
+			                && CurrentDailyResponse > SlowResponseThreshold,
+			            1,
+			            0
+			        )
+			    )
+		formatString: 0
+		displayFolder: 04 Demand\Demand and Response
+		lineageTag: 7e74fd81-e866-4177-8773-21d7ff4e4a54
+
+	measure 'High Demand Slow Response Days' =
+			
+			VAR HighDemandThreshold =
+			    [P75 Daily Demand Threshold]
+			VAR SlowResponseThreshold =
+			    [Selected Period Average Response Minutes]
+			VAR SelectedDates =
+			    ALLSELECTED (
+			        gold_dim_date[full_date]
+			    )
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            SelectedDates,
+			            VAR DailyDemand =
+			                CALCULATE (
+			                    [Daily Aggregate Incidents]
+			                )
+			            VAR DailyResponse =
+			                CALCULATE (
+			                    [Daily Performance Average Response Minutes]
+			                )
+			            RETURN
+			                NOT ISBLANK ( DailyDemand )
+			                    && NOT ISBLANK ( DailyResponse )
+			                    && DailyDemand >= HighDemandThreshold
+			                    && DailyResponse > SlowResponseThreshold
+			        )
+			    )
+		formatString: 0
+		displayFolder: 04 Demand\Demand and Response
+		lineageTag: 8c1c4acf-3054-4cca-a389-6a25c63b0be9
+
+	measure 'High Demand Slow Response Day Percentage' =
+			
+			DIVIDE (
+			    [High Demand Slow Response Days],
+			    [Selected Calendar Days]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 04 Demand\Demand and Response
+		lineageTag: 0d78923b-5510-422e-8180-b4b748538e9e
+
+	column 'Measure Holder'
+		isHidden
+		formatString: 0
+		lineageTag: 73bf6a89-f821-402e-9aab-833387846b1f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Measure Holder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source =
+				DATATABLE (
+				    "Measure Holder",
+				    INTEGER,
+				    {
+				        { 1 }
+				    }
+				)
+
+	annotation PBI_Id = a1038756e6f34f369f491d355d89ac35
+

@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "d772629e1bc7e806fea6",
+  "position": {
+    "x": 9.9740259740259738,
+    "y": 352.41558441558442,
+    "z": 8000,
+    "height": 202.80519480519482,
+    "width": 738.077922077922,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dim_severity"
+                    }
+                  },
+                  "Property": "severity_label"
+                }
+              },
+              "queryRef": "gold_dim_severity.severity_label",
+              "nativeQueryRef": "severity_label"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Final Severity Incidents"
+                }
+              },
+              "queryRef": "_Measures.Final Severity Incidents",
+              "nativeQueryRef": "Final Severity Incidents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Final Severity Incident Percentage"
+                }
+              },
+              "queryRef": "_Measures.Final Severity Incident Percentage",
+              "nativeQueryRef": "Final Severity Incident Percentage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Final Severity Rank"
+                }
+              },
+              "queryRef": "_Measures.Final Severity Rank",
+              "nativeQueryRef": "Final Severity Rank"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Final Severity Incidents"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DirectLake - nyc_ems_lakehouse"]
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit"]
+
+ref table gold_fact_ems_incident
+ref table gold_agg_daily_performance
+ref table gold_dim_date
+ref table gold_dim_time
+ref table gold_dim_disposition
+ref table gold_dim_geography
+ref table gold_dim_severity
+ref table gold_dim_call_type
+ref table _Measures
+

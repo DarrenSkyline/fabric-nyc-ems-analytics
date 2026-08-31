@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "NYC EMS Analytics Semantic Model"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e483bab2-82d5-a1ee-4f40-115ea99fb4cc"
+  }
+}

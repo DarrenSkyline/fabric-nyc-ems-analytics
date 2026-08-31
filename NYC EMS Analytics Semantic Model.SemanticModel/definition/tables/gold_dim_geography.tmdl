@@ -1,0 +1,78 @@
+table gold_dim_geography
+	lineageTag: 3f070a89-fdfd-40d1-baa1-e705ee4e2a06
+	sourceLineageTag: [dbo].[gold_dim_geography]
+
+	column geography_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 724a8c17-f9a0-4296-b5ee-bbe40141b83d
+		sourceLineageTag: geography_key
+		summarizeBy: none
+		sourceColumn: geography_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column borough
+		dataType: string
+		lineageTag: 87cc5555-b653-4df7-8455-88020cc57639
+		sourceLineageTag: borough
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column zipcode
+		dataType: string
+		lineageTag: 159c2e3a-b73d-47c5-9f63-d0e36a992821
+		sourceLineageTag: zipcode
+		summarizeBy: none
+		sourceColumn: zipcode
+
+		annotation SummarizationSetBy = Automatic
+
+	column policeprecinct
+		dataType: string
+		lineageTag: e90e90d2-bb88-4de5-8eed-220deb7ecc4d
+		sourceLineageTag: policeprecinct
+		summarizeBy: none
+		sourceColumn: policeprecinct
+
+		annotation SummarizationSetBy = Automatic
+
+	column citycouncildistrict
+		dataType: string
+		lineageTag: d6267350-3beb-4fa8-af6b-13995917fe6a
+		sourceLineageTag: citycouncildistrict
+		summarizeBy: none
+		sourceColumn: citycouncildistrict
+
+		annotation SummarizationSetBy = Automatic
+
+	column communitydistrict
+		dataType: string
+		lineageTag: e998c1d7-a84c-4f15-9033-9e90ffed9a28
+		sourceLineageTag: communitydistrict
+		summarizeBy: none
+		sourceColumn: communitydistrict
+
+		annotation SummarizationSetBy = Automatic
+
+	column geography_label
+		dataType: string
+		lineageTag: be8300a0-e179-4606-a05a-b3d2eda60322
+		sourceLineageTag: geography_label
+		summarizeBy: none
+		sourceColumn: geography_label
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_geography = entity
+		mode: directLake
+		source
+			entityName: gold_dim_geography
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

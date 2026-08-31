@@ -1,0 +1,68 @@
+table gold_dim_call_type
+	lineageTag: 0d60ab59-646f-4ea8-9b87-ff58cdd5ae1d
+	sourceLineageTag: [dbo].[gold_dim_call_type]
+
+	column call_type_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 55db68c4-e430-4634-8f5c-27807fcd342e
+		sourceLineageTag: call_type_key
+		summarizeBy: none
+		sourceColumn: call_type_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column call_type
+		dataType: string
+		lineageTag: 3644cbf6-060f-4d59-aee6-04fde02a2f5f
+		sourceLineageTag: call_type
+		summarizeBy: none
+		sourceColumn: call_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column appears_as_initial
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6bfeee31-892c-429f-8932-51a41e1935d5
+		sourceLineageTag: appears_as_initial
+		summarizeBy: none
+		sourceColumn: appears_as_initial
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column appears_as_final
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 754d39c7-2c4c-4895-bce1-2178c2c7737d
+		sourceLineageTag: appears_as_final
+		summarizeBy: none
+		sourceColumn: appears_as_final
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column call_type_description
+		dataType: string
+		lineageTag: cb42ccb0-f0d9-4c6d-89b4-974397212c4c
+		sourceLineageTag: call_type_description
+		summarizeBy: none
+		sourceColumn: call_type_description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_call_type = entity
+		mode: directLake
+		source
+			entityName: gold_dim_call_type
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

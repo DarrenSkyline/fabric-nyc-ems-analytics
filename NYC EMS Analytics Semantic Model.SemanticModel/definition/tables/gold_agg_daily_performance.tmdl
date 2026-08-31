@@ -1,0 +1,785 @@
+table gold_agg_daily_performance
+	lineageTag: 0cbae8d8-2f62-4ecc-9f99-baaa653158cd
+	sourceLineageTag: [dbo].[gold_agg_daily_performance]
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: af7b95a2-4605-48a9-9f78-85aef4556a68
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_date
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 1186ba38-1010-49db-9eee-d1b06696e0f1
+		sourceLineageTag: incident_date
+		summarizeBy: none
+		sourceColumn: incident_date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_year
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fb0b6eb1-699c-42f7-a7c1-e9ec17de308b
+		sourceLineageTag: incident_year
+		summarizeBy: none
+		sourceColumn: incident_year
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column borough
+		dataType: string
+		lineageTag: b9763253-07b3-46a3-b559-1da3a143d22d
+		sourceLineageTag: borough
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column initial_severity_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 89b40fda-8907-4766-9051-506e15b7e4ec
+		sourceLineageTag: initial_severity_key
+		summarizeBy: none
+		sourceColumn: initial_severity_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column initial_severity_level_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e9812f3b-8eaa-4988-9dcf-06e0c14d0bb3
+		sourceLineageTag: initial_severity_level_code
+		summarizeBy: none
+		sourceColumn: initial_severity_level_code
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column initial_severity_label
+		dataType: string
+		isHidden
+		lineageTag: 2f2f6131-7ed0-498a-8158-e4608c32c326
+		sourceLineageTag: initial_severity_label
+		summarizeBy: none
+		sourceColumn: initial_severity_label
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_incidents
+		dataType: int64
+		formatString: 0
+		lineageTag: d76bbc02-a802-49b9-8f5e-f6f4ca525bfa
+		sourceLineageTag: total_incidents
+		summarizeBy: sum
+		sourceColumn: total_incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_dispatch_response_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 783324b2-2c8f-4708-a4e2-1bd681497915
+		sourceLineageTag: valid_dispatch_response_count
+		summarizeBy: sum
+		sourceColumn: valid_dispatch_response_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_incident_response_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 42e0264e-8b2f-4f69-8c7e-e654934c1143
+		sourceLineageTag: valid_incident_response_count
+		summarizeBy: sum
+		sourceColumn: valid_incident_response_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_travel_time_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c90ecd1-47f2-45d6-b3b9-b14b92284b46
+		sourceLineageTag: valid_travel_time_count
+		summarizeBy: sum
+		sourceColumn: valid_travel_time_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_response_rate
+		dataType: double
+		lineageTag: a73d28ca-c946-4565-bc6b-6509d45062d1
+		sourceLineageTag: valid_response_rate
+		summarizeBy: none
+		sourceColumn: valid_response_rate
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_dispatch_response_seconds
+		dataType: double
+		lineageTag: 18b6dcd7-97bc-4ea1-9d72-2d9e1f06934a
+		sourceLineageTag: total_dispatch_response_seconds
+		summarizeBy: sum
+		sourceColumn: total_dispatch_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_incident_response_seconds
+		dataType: double
+		lineageTag: d55bcbc6-059c-4317-81e9-03d9f2d8d6fe
+		sourceLineageTag: total_incident_response_seconds
+		summarizeBy: sum
+		sourceColumn: total_incident_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_travel_time_seconds
+		dataType: double
+		lineageTag: ad30a0ae-520d-4179-9ace-0708c7a561fe
+		sourceLineageTag: total_travel_time_seconds
+		summarizeBy: sum
+		sourceColumn: total_travel_time_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_dispatch_response_seconds
+		dataType: double
+		lineageTag: a15b85e0-82b1-4a2d-b035-a16fb7646f13
+		sourceLineageTag: average_dispatch_response_seconds
+		summarizeBy: none
+		sourceColumn: average_dispatch_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_incident_response_seconds
+		dataType: double
+		lineageTag: e931e5c7-cb05-4747-9adc-0d193a2d3c6e
+		sourceLineageTag: average_incident_response_seconds
+		summarizeBy: none
+		sourceColumn: average_incident_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_travel_time_seconds
+		dataType: double
+		lineageTag: da79d6ed-fba3-4309-a10b-53b026fbaab3
+		sourceLineageTag: average_travel_time_seconds
+		summarizeBy: none
+		sourceColumn: average_travel_time_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column population_stddev_response_seconds
+		dataType: double
+		lineageTag: b8db56ff-d31a-4a46-890e-791e3cbe9815
+		sourceLineageTag: population_stddev_response_seconds
+		summarizeBy: none
+		sourceColumn: population_stddev_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column minimum_response_seconds
+		dataType: double
+		lineageTag: 9baa5b64-5ba9-4aed-be37-e492d36a1188
+		sourceLineageTag: minimum_response_seconds
+		summarizeBy: none
+		sourceColumn: minimum_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maximum_response_seconds
+		dataType: double
+		lineageTag: 7d53a33c-eff3-4517-a1f2-c6fd604f87a7
+		sourceLineageTag: maximum_response_seconds
+		summarizeBy: none
+		sourceColumn: maximum_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p50_response_seconds
+		dataType: double
+		lineageTag: b530c1b7-2f95-4e5d-a82e-7c55500c38ea
+		sourceLineageTag: p50_response_seconds
+		summarizeBy: none
+		sourceColumn: p50_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p75_response_seconds
+		dataType: double
+		lineageTag: fe6266fe-fa4f-420c-92c4-bb9b7519ccbf
+		sourceLineageTag: p75_response_seconds
+		summarizeBy: none
+		sourceColumn: p75_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p90_response_seconds
+		dataType: double
+		lineageTag: 8184cbef-348a-417d-ba31-639a544bb4ff
+		sourceLineageTag: p90_response_seconds
+		summarizeBy: none
+		sourceColumn: p90_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p95_response_seconds
+		dataType: double
+		lineageTag: ed373d44-dfbe-4140-9d93-882e99dd36cb
+		sourceLineageTag: p95_response_seconds
+		summarizeBy: none
+		sourceColumn: p95_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column held_incident_count
+		dataType: int64
+		formatString: 0
+		lineageTag: c1dc279b-927a-4a76-8483-b90eb08ba765
+		sourceLineageTag: held_incident_count
+		summarizeBy: sum
+		sourceColumn: held_incident_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column special_event_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e85e7cf-9bff-42d7-894f-ac775f70f230
+		sourceLineageTag: special_event_count
+		summarizeBy: sum
+		sourceColumn: special_event_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column transfer_incident_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f57f3c8-2810-469d-8a6c-bdc00f062765
+		sourceLineageTag: transfer_incident_count
+		summarizeBy: sum
+		sourceColumn: transfer_incident_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_response_percentage
+		dataType: double
+		lineageTag: a3057f78-ccb8-4001-9a16-5290ba286b19
+		sourceLineageTag: valid_response_percentage
+		summarizeBy: none
+		sourceColumn: valid_response_percentage
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_dispatch_response_minutes
+		dataType: double
+		lineageTag: 5f29972e-3a2b-4334-b132-72c0e342cd5b
+		sourceLineageTag: average_dispatch_response_minutes
+		summarizeBy: none
+		sourceColumn: average_dispatch_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_incident_response_minutes
+		dataType: double
+		lineageTag: 912c98ce-bdcb-4184-b3a4-16a36e64ce20
+		sourceLineageTag: average_incident_response_minutes
+		summarizeBy: none
+		sourceColumn: average_incident_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_travel_time_minutes
+		dataType: double
+		lineageTag: d1c10d22-0400-4d48-9665-31e4684de781
+		sourceLineageTag: average_travel_time_minutes
+		summarizeBy: none
+		sourceColumn: average_travel_time_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column population_stddev_response_minutes
+		dataType: double
+		lineageTag: 559d7a6a-bb47-4409-a706-3ae9cd9e635c
+		sourceLineageTag: population_stddev_response_minutes
+		summarizeBy: none
+		sourceColumn: population_stddev_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p50_response_minutes
+		dataType: double
+		lineageTag: 3d1d49ec-2567-4f2f-b2d1-50d832f8be5c
+		sourceLineageTag: p50_response_minutes
+		summarizeBy: none
+		sourceColumn: p50_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p75_response_minutes
+		dataType: double
+		lineageTag: 0340c91d-4091-4921-974c-af4de26c3c9a
+		sourceLineageTag: p75_response_minutes
+		summarizeBy: none
+		sourceColumn: p75_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p90_response_minutes
+		dataType: double
+		lineageTag: 7dce19be-a899-4497-9fcb-5528f4b88694
+		sourceLineageTag: p90_response_minutes
+		summarizeBy: none
+		sourceColumn: p90_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p95_response_minutes
+		dataType: double
+		lineageTag: 3b2a0e3b-f142-42dc-a6d0-f6efc29ba638
+		sourceLineageTag: p95_response_minutes
+		summarizeBy: none
+		sourceColumn: p95_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column minimum_response_minutes
+		dataType: double
+		lineageTag: bd458be9-d5c3-49a8-b108-bc8a18dfe648
+		sourceLineageTag: minimum_response_minutes
+		summarizeBy: none
+		sourceColumn: minimum_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maximum_response_minutes
+		dataType: double
+		lineageTag: 6fcb77d6-393a-4c6a-852e-fe079e36b709
+		sourceLineageTag: maximum_response_minutes
+		summarizeBy: none
+		sourceColumn: maximum_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column response_coefficient_of_variation
+		dataType: double
+		lineageTag: a065645c-2155-4e60-9603-4584fa547964
+		sourceLineageTag: response_coefficient_of_variation
+		summarizeBy: none
+		sourceColumn: response_coefficient_of_variation
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column response_cv_percentage
+		dataType: double
+		lineageTag: 728e9a5f-3e20-4f27-901b-62176ab14e5d
+		sourceLineageTag: response_cv_percentage
+		summarizeBy: none
+		sourceColumn: response_cv_percentage
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column held_incident_rate
+		dataType: double
+		lineageTag: b3030d8f-cd75-4521-abe5-30c38b390de4
+		sourceLineageTag: held_incident_rate
+		summarizeBy: none
+		sourceColumn: held_incident_rate
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column special_event_rate
+		dataType: double
+		lineageTag: c91f6c5b-7bd6-4756-a105-74240798b9f0
+		sourceLineageTag: special_event_rate
+		summarizeBy: none
+		sourceColumn: special_event_rate
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column transfer_incident_rate
+		dataType: double
+		lineageTag: 985b02ec-8ca8-48f8-94b1-8ae6ceba2cd7
+		sourceLineageTag: transfer_incident_rate
+		summarizeBy: none
+		sourceColumn: transfer_incident_rate
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column held_incident_percentage
+		dataType: double
+		lineageTag: 504f1b82-0eec-46c8-90d9-3eb6922248cc
+		sourceLineageTag: held_incident_percentage
+		summarizeBy: none
+		sourceColumn: held_incident_percentage
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column special_event_percentage
+		dataType: double
+		lineageTag: 35a1a90f-3745-44ef-933d-02f2f4c1d409
+		sourceLineageTag: special_event_percentage
+		summarizeBy: none
+		sourceColumn: special_event_percentage
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column transfer_incident_percentage
+		dataType: double
+		lineageTag: b137788a-2c0d-436f-8151-f8300f26f268
+		sourceLineageTag: transfer_incident_percentage
+		summarizeBy: none
+		sourceColumn: transfer_incident_percentage
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column has_sufficient_sample
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 48276b14-a209-464b-8f64-e84c4e44442c
+		sourceLineageTag: has_sufficient_sample
+		summarizeBy: none
+		sourceColumn: has_sufficient_sample
+
+		annotation SummarizationSetBy = Automatic
+
+	column analytics_quality_status
+		dataType: string
+		lineageTag: 84db6959-7a89-491d-aed6-692fc5b55e70
+		sourceLineageTag: analytics_quality_status
+		summarizeBy: none
+		sourceColumn: analytics_quality_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column historical_baseline_day_count
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7d6727cd-b845-41f2-8e87-8d0d18ad4327
+		sourceLineageTag: historical_baseline_day_count
+		summarizeBy: none
+		sourceColumn: historical_baseline_day_count
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column response_center_line_seconds
+		dataType: double
+		lineageTag: 8411ed33-e600-41bf-bb46-e68b942f9246
+		sourceLineageTag: response_center_line_seconds
+		summarizeBy: none
+		sourceColumn: response_center_line_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column daily_average_stddev_seconds
+		dataType: double
+		lineageTag: f8e70ee0-34b4-436b-a474-c1eff4fc9cc9
+		sourceLineageTag: daily_average_stddev_seconds
+		summarizeBy: none
+		sourceColumn: daily_average_stddev_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column has_sufficient_baseline
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e2f64c38-1872-441a-af99-27f21c330dfb
+		sourceLineageTag: has_sufficient_baseline
+		summarizeBy: none
+		sourceColumn: has_sufficient_baseline
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column upper_control_limit_seconds
+		dataType: double
+		lineageTag: 53834719-d42f-45e8-b316-3d605cfce2b2
+		sourceLineageTag: upper_control_limit_seconds
+		summarizeBy: none
+		sourceColumn: upper_control_limit_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lower_control_limit_seconds
+		dataType: double
+		lineageTag: c0e5a316-d075-4ac8-882a-261f1545f822
+		sourceLineageTag: lower_control_limit_seconds
+		summarizeBy: none
+		sourceColumn: lower_control_limit_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_above_upper_control_limit
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 915501b6-526b-43d8-be9c-e8435f79cb9d
+		sourceLineageTag: is_above_upper_control_limit
+		summarizeBy: none
+		sourceColumn: is_above_upper_control_limit
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_below_lower_control_limit
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8ed7a66a-4c46-47a7-b71b-13c2cef0964c
+		sourceLineageTag: is_below_lower_control_limit
+		summarizeBy: none
+		sourceColumn: is_below_lower_control_limit
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_response_anomaly
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 507990b9-8545-43d5-b75c-340cd4613ebe
+		sourceLineageTag: is_response_anomaly
+		summarizeBy: none
+		sourceColumn: is_response_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column response_anomaly_direction
+		dataType: string
+		lineageTag: 8f12bb62-103e-4e20-a17d-d280035dfda8
+		sourceLineageTag: response_anomaly_direction
+		summarizeBy: none
+		sourceColumn: response_anomaly_direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_reportable_response_anomaly
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2a95c861-1259-4c52-b738-c207feb06183
+		sourceLineageTag: is_reportable_response_anomaly
+		summarizeBy: none
+		sourceColumn: is_reportable_response_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column response_center_line_minutes
+		dataType: double
+		lineageTag: 659a48c8-0bee-4fc2-9265-0a4c0873c937
+		sourceLineageTag: response_center_line_minutes
+		summarizeBy: none
+		sourceColumn: response_center_line_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column upper_control_limit_minutes
+		dataType: double
+		lineageTag: 839d5476-fda9-4390-831a-add6caa34ab0
+		sourceLineageTag: upper_control_limit_minutes
+		summarizeBy: none
+		sourceColumn: upper_control_limit_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lower_control_limit_minutes
+		dataType: double
+		lineageTag: 0ce74a70-0781-453d-be45-5a751797742e
+		sourceLineageTag: lower_control_limit_minutes
+		summarizeBy: none
+		sourceColumn: lower_control_limit_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_agg_daily_performance = entity
+		mode: directLake
+		source
+			entityName: gold_agg_daily_performance
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

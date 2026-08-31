@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "38b30731a2a37355684d",
+  "position": {
+    "x": 806.23376623376623,
+    "y": 149.6103896103896,
+    "z": 7000,
+    "height": 202.80519480519482,
+    "width": 653.2987012987013,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dim_disposition"
+                    }
+                  },
+                  "Property": "disposition_category"
+                }
+              },
+              "queryRef": "gold_dim_disposition.disposition_category",
+              "nativeQueryRef": "disposition_category"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Incidents"
+                }
+              },
+              "queryRef": "_Measures.Total Incidents",
+              "nativeQueryRef": "Total Incidents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Disposition Incident Percentage"
+                }
+              },
+              "queryRef": "_Measures.Disposition Incident Percentage",
+              "nativeQueryRef": "Disposition Incident Percentage"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

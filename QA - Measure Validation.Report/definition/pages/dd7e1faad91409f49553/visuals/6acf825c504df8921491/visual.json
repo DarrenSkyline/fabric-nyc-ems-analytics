@@ -1,0 +1,111 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "6acf825c504df8921491",
+  "position": {
+    "x": 748.0519480519481,
+    "y": 352.41558441558442,
+    "z": 9000,
+    "height": 202.80519480519482,
+    "width": 1082.1818181818182,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dim_call_type"
+                    }
+                  },
+                  "Property": "call_type"
+                }
+              },
+              "queryRef": "gold_dim_call_type.call_type",
+              "nativeQueryRef": "call_type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dim_call_type"
+                    }
+                  },
+                  "Property": "call_type_description"
+                }
+              },
+              "queryRef": "gold_dim_call_type.call_type_description",
+              "nativeQueryRef": "call_type_description"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Final Call Type Incidents"
+                }
+              },
+              "queryRef": "_Measures.Final Call Type Incidents",
+              "nativeQueryRef": "Final Call Type Incidents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Final Call Type Incident Percentage"
+                }
+              },
+              "queryRef": "_Measures.Final Call Type Incident Percentage",
+              "nativeQueryRef": "Final Call Type Incident Percentage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Final Call Type Rank"
+                }
+              },
+              "queryRef": "_Measures.Final Call Type Rank",
+              "nativeQueryRef": "Final Call Type Rank"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Final Call Type Rank"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

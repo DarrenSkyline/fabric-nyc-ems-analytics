@@ -1,0 +1,105 @@
+table gold_dim_disposition
+	lineageTag: d7487f75-0d67-47c1-bacc-4f49cc71f08e
+	sourceLineageTag: [dbo].[gold_dim_disposition]
+
+	column disposition_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7d09830a-c757-4fa8-8324-c9fa5c2d1c52
+		sourceLineageTag: disposition_key
+		summarizeBy: none
+		sourceColumn: disposition_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_code
+		dataType: string
+		lineageTag: c09791be-4b15-4e44-aa62-95059d229b79
+		sourceLineageTag: disposition_code
+		summarizeBy: none
+		sourceColumn: disposition_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_description
+		dataType: string
+		lineageTag: 2a7a2963-187e-477e-a959-7072026306dd
+		sourceLineageTag: disposition_description
+		summarizeBy: none
+		sourceColumn: disposition_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_category
+		dataType: string
+		lineageTag: 17aac97f-3ca1-463b-b6b3-690691db85ed
+		sourceLineageTag: disposition_category
+		summarizeBy: none
+		sourceColumn: disposition_category
+		sortByColumn: disposition_category_sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_category_sort
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9f0c1c57-0bb0-4adf-b005-e3b3488ae37a
+		sourceLineageTag: disposition_category_sort
+		summarizeBy: none
+		sourceColumn: disposition_category_sort
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column mapping_status
+		dataType: string
+		isHidden
+		lineageTag: 4fe3845f-2b51-403a-bdf1-b6ec002ca18a
+		sourceLineageTag: mapping_status
+		summarizeBy: none
+		sourceColumn: mapping_status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_documented_code
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 41f2637e-2626-478b-a3c0-8d02db7584bc
+		sourceLineageTag: is_documented_code
+		summarizeBy: none
+		sourceColumn: is_documented_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_unknown
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d4408549-d34a-4e3f-b580-f3c5e6d2f31d
+		sourceLineageTag: is_unknown
+		summarizeBy: none
+		sourceColumn: is_unknown
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dim_disposition = entity
+		mode: directLake
+		source
+			entityName: gold_dim_disposition
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

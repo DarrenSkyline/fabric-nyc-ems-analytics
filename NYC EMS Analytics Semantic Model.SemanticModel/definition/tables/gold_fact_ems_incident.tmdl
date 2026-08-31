@@ -1,0 +1,365 @@
+table gold_fact_ems_incident
+	lineageTag: 366214f5-3178-4e57-aa32-44034dddde76
+	sourceLineageTag: [dbo].[gold_fact_ems_incident]
+
+	column incident_id
+		dataType: string
+		isHidden
+		lineageTag: 8a8a8ae3-3c46-4c92-b23b-be96603fed31
+		sourceLineageTag: incident_id
+		summarizeBy: none
+		sourceColumn: incident_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4d6870f3-49cf-4f59-af74-8a27b4e026e7
+		sourceLineageTag: incident_datetime
+		summarizeBy: none
+		sourceColumn: incident_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_year
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0bb07438-310f-4b37-b055-72b7be8ad2bb
+		sourceLineageTag: incident_year
+		summarizeBy: none
+		sourceColumn: incident_year
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f2a8826e-2ed3-4126-a677-0fcc41cf15e1
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b043a35d-6c4c-46da-838f-0581ea82782c
+		sourceLineageTag: time_key
+		summarizeBy: none
+		sourceColumn: time_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column geography_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d464343c-d189-4a1a-9f40-340f1bbd1056
+		sourceLineageTag: geography_key
+		summarizeBy: none
+		sourceColumn: geography_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column initial_call_type_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 95fc0da3-1267-431d-b2e4-eca0334cf6f1
+		sourceLineageTag: initial_call_type_key
+		summarizeBy: none
+		sourceColumn: initial_call_type_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_call_type_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 163cd906-111b-4dd7-ad93-ecffd5bed1dd
+		sourceLineageTag: final_call_type_key
+		summarizeBy: none
+		sourceColumn: final_call_type_key
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column initial_severity_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bb16351b-58ae-4c3f-a2d1-f9009f769d14
+		sourceLineageTag: initial_severity_key
+		summarizeBy: none
+		sourceColumn: initial_severity_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_severity_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d5cf4939-b292-470d-92ae-a39c18e3fe9d
+		sourceLineageTag: final_severity_key
+		summarizeBy: none
+		sourceColumn: final_severity_key
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column disposition_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4e7ea4d7-c180-4f4f-bfe9-34f55bb1c999
+		sourceLineageTag: disposition_key
+		summarizeBy: none
+		sourceColumn: disposition_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_count
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 019fb4ed-7e40-4d53-804c-ff905dde1faf
+		sourceLineageTag: incident_count
+		summarizeBy: none
+		sourceColumn: incident_count
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column valid_dispatch_response_seconds
+		dataType: double
+		lineageTag: 6178b6bf-79a8-428d-b39c-1928a902a9e8
+		sourceLineageTag: valid_dispatch_response_seconds
+		summarizeBy: none
+		sourceColumn: valid_dispatch_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valid_incident_response_seconds
+		dataType: double
+		lineageTag: d71506ec-e424-4e73-9a43-2ba8eb31fcd2
+		sourceLineageTag: valid_incident_response_seconds
+		summarizeBy: none
+		sourceColumn: valid_incident_response_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valid_travel_time_seconds
+		dataType: double
+		lineageTag: 595794f4-6337-427b-88e0-32a55c7a3a11
+		sourceLineageTag: valid_travel_time_seconds
+		summarizeBy: none
+		sourceColumn: valid_travel_time_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dispatch_response_minutes
+		dataType: double
+		lineageTag: 1d1ee69f-9034-492a-94f1-12e83bedaee5
+		sourceLineageTag: dispatch_response_minutes
+		summarizeBy: none
+		sourceColumn: dispatch_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column incident_response_minutes
+		dataType: double
+		lineageTag: ab4b839c-312d-4c92-b876-87dfaf08135f
+		sourceLineageTag: incident_response_minutes
+		summarizeBy: none
+		sourceColumn: incident_response_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column travel_time_minutes
+		dataType: double
+		lineageTag: 2d8fa3c0-058c-4707-908f-c67c74c58c23
+		sourceLineageTag: travel_time_minutes
+		summarizeBy: none
+		sourceColumn: travel_time_minutes
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column incident_duration_seconds
+		dataType: double
+		lineageTag: 2057b0e1-d4e6-48b9-b242-6aa5e30d57a5
+		sourceLineageTag: incident_duration_seconds
+		summarizeBy: none
+		sourceColumn: incident_duration_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hospital_travel_seconds
+		dataType: double
+		lineageTag: 964f2083-b655-4c7e-802b-1637dc41f4df
+		sourceLineageTag: hospital_travel_seconds
+		summarizeBy: none
+		sourceColumn: hospital_travel_seconds
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_valid_dispatch_response
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b18c568d-31d3-4a44-992b-3f8e40a461e9
+		sourceLineageTag: is_valid_dispatch_response
+		summarizeBy: none
+		sourceColumn: is_valid_dispatch_response
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_valid_incident_response
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5b91c2ba-97f9-4efe-b877-7a0ea8b68c0c
+		sourceLineageTag: is_valid_incident_response
+		summarizeBy: none
+		sourceColumn: is_valid_incident_response
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_held
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: efd9bc23-9753-4dd8-810c-bcf42d28b6ae
+		sourceLineageTag: is_held
+		summarizeBy: none
+		sourceColumn: is_held
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_reopened
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b486121d-cbf6-48ae-a05e-ef147d12082f
+		sourceLineageTag: is_reopened
+		summarizeBy: none
+		sourceColumn: is_reopened
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_special_event
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bc56f09c-dd30-4b0e-b1e0-a4c75a8b60f1
+		sourceLineageTag: is_special_event
+		summarizeBy: none
+		sourceColumn: is_special_event
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_standby
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 740fcc5c-7b00-4339-9089-a8074044cdf0
+		sourceLineageTag: is_standby
+		summarizeBy: none
+		sourceColumn: is_standby
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_transfer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f4f3af72-341e-46e6-b1e9-b5dc9ac52367
+		sourceLineageTag: is_transfer
+		summarizeBy: none
+		sourceColumn: is_transfer
+
+		annotation SummarizationSetBy = Automatic
+
+	column call_type_changed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f99d2495-2a8b-4aba-a534-e9fee54abe17
+		sourceLineageTag: call_type_changed
+		summarizeBy: none
+		sourceColumn: call_type_changed
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity_changed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d569429a-0afa-419a-b156-46f3ef19923c
+		sourceLineageTag: severity_changed
+		summarizeBy: none
+		sourceColumn: severity_changed
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_fact_ems_incident = entity
+		mode: directLake
+		source
+			entityName: gold_fact_ems_incident
+			schemaName: dbo
+			expressionSource: 'DirectLake - nyc_ems_lakehouse'
+

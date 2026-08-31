@@ -1,0 +1,11 @@
+expression 'DirectLake - nyc_ems_lakehouse' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/e72e0909-21e6-43a8-9809-2f28d2090b05/62afa944-791d-4816-8ef6-98a724c248a9", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 7bf81305-f3db-4c08-8c51-8a530644ff7b
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[gold_ems_data_quality_audit]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[silver_ems_incidents]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[bronze_ems_ingestion_audit]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[silver_ems_data_quality_audit]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[bronze_ems_incidents]"}},"objectType":"Table"}]
+
