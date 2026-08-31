@@ -364,6 +364,25 @@ The hidden QA page validates core totals, weighted measures, percentages, role-p
 
 ![Power BI semantic model and DAX validation](screenshots/09_semantic_model_measure_validation.png)
 
+## Power BI Report
+
+### Executive Overview
+
+The completed Executive Overview provides a concise summary of EMS demand,
+response performance, operational pressure, and incident outcomes from 2019
+to 2025. Interactive Year, Borough, and Initial Severity filters support
+cross-cutting analysis across the page.
+
+The page includes:
+
+* Total incident volume and core response-performance KPIs
+* Annual incident volume and year-over-year change
+* Incident demand by NYC borough
+* Average response time by initial severity level
+* Transport and non-transport outcomes by disposition
+
+![NYC EMS Executive Overview](screenshots/10_power_bi_executive_overview.png)
+
 ## Analytics Workflow
 
 ```text
@@ -441,15 +460,15 @@ Business Insights and Recommendations
 * Weighted response-time, reliability, percentile, and coefficient-of-variation measures
 * Control-limit and reportable-anomaly measures
 * Semantic-model and DAX QA report page
+* Power BI Executive Overview report page
 
 ### In Progress
 
-* Power BI report development
+* Remaining Power BI analytical report pages
 
 ### Next Steps
 
-* Build the executive-overview report page
-* Develop emergency-demand, response-performance, reliability, and outcomes pages
+* Develop emergency-demand, response-performance, reliability, and outcomes/classification pages
 * Apply consistent report formatting, navigation, tooltips, and interactions
 * Add time-series forecasting and projection visuals
 * Document findings and business recommendations
