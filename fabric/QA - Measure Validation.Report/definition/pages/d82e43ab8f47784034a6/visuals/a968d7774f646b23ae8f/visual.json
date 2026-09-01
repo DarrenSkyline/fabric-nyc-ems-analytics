@@ -6,7 +6,7 @@
     "y": 154.99999999999997,
     "z": 12000,
     "height": 91.818181818181813,
-    "width": 360,
+    "width": 600,
     "tabOrder": 12000
   },
   "visual": {
@@ -118,9 +118,78 @@
           "selector": {
             "metadata": "_Measures.Total Incidents"
           }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#667085'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DDE3EA'"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ed03fa59b63a29eb6769",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Incidents"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
