@@ -383,6 +383,26 @@ The page includes:
 
 ![NYC EMS Executive Overview](screenshots/10_power_bi_executive_overview.png)
 
+### Emergency Demand
+
+The completed Emergency Demand page provides detailed analysis of when EMS
+incidents occur and which initial dispatch classifications generate the most
+demand. Interactive Year, Borough, Initial Severity, and Initial Call Type
+filters recalculate the page within the selected context.
+
+The page includes:
+
+* Total incident volume, average daily incidents, and peak daily demand
+* Monthly incident trends across the complete 2019–2025 period
+* A day-of-week and hour-of-day demand heatmap
+* The ten most common documented initial call types by incident volume
+
+The call-type ranking excludes the controlled `UNKNOWN` member so that missing
+classifications are not presented as a business call type. Unknown and
+undocumented values remain available for separate data-quality analysis.
+
+![NYC EMS Emergency Demand](screenshots/11_power_bi_emergency_demand.png)
+
 ## Analytics Workflow
 
 ```text
@@ -461,6 +481,7 @@ Business Insights and Recommendations
 * Control-limit and reportable-anomaly measures
 * Semantic-model and DAX QA report page
 * Power BI Executive Overview report page
+* Power BI Emergency Demand report page
 
 ### In Progress
 
@@ -468,7 +489,7 @@ Business Insights and Recommendations
 
 ### Next Steps
 
-* Develop emergency-demand, response-performance, reliability, and outcomes/classification pages
+* Develop response-performance, reliability, and outcomes/classification pages
 * Apply consistent report formatting, navigation, tooltips, and interactions
 * Add time-series forecasting and projection visuals
 * Document findings and business recommendations
