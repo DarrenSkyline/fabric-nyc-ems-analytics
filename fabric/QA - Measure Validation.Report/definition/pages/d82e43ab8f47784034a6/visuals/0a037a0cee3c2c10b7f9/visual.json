@@ -2,37 +2,57 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "0a037a0cee3c2c10b7f9",
   "position": {
-    "x": 31.428571428571431,
-    "y": 625.71428571428578,
-    "z": 19000,
-    "height": 425.71428571428572,
-    "width": 835.71428571428578,
+    "x": 32.76958882854926,
+    "y": 676.245151280062,
+    "z": 17000,
+    "height": 375.36074476338246,
+    "width": 1133.5298681148176,
     "tabOrder": 19000
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Category": {
+        "Columns": {
           "projections": [
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "gold_dim_severity"
+                      "Entity": "gold_dim_time"
                     }
                   },
-                  "Property": "severity_label"
+                  "Property": "hour_label"
                 }
               },
-              "queryRef": "gold_dim_severity.severity_label",
-              "nativeQueryRef": "severity_label",
+              "queryRef": "gold_dim_time.hour_label",
+              "nativeQueryRef": "hour_label",
               "active": true
             }
           ]
         },
-        "Tooltips": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dim_date"
+                    }
+                  },
+                  "Property": "day_of_week_short_name"
+                }
+              },
+              "queryRef": "gold_dim_date.day_of_week_short_name",
+              "nativeQueryRef": "Day",
+              "active": true,
+              "displayName": "Day"
+            }
+          ]
+        },
+        "Values": {
           "projections": [
             {
               "field": {
@@ -47,155 +67,46 @@
               },
               "queryRef": "_Measures.Total Incidents",
               "nativeQueryRef": "Total Incidents"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Valid Incident Response Percentage"
-                }
-              },
-              "queryRef": "_Measures.Valid Incident Response Percentage",
-              "nativeQueryRef": "Valid Incident Response Percentage"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Population Std Dev Response Minutes"
-                }
-              },
-              "queryRef": "_Measures.Population Std Dev Response Minutes",
-              "nativeQueryRef": "Population Std Dev Response Minutes"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "P90 Response Minutes"
-                }
-              },
-              "queryRef": "_Measures.P90 Response Minutes",
-              "nativeQueryRef": "P90 Response Minutes"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Average Incident Response Minutes"
-                }
-              },
-              "queryRef": "_Measures.Average Incident Response Minutes",
-              "nativeQueryRef": "Average Incident Response Minutes"
             }
           ]
         }
       }
     },
     "objects": {
-      "dataPoint": [
+      "subTotals": [
         {
           "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#2878B5'"
-                    }
-                  }
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F59E0B'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Measures.P90 Response Minutes"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F59E0B'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "scopeId": {
-                  "Comparison": {
-                    "ComparisonKind": 0,
-                    "Left": {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Entity": "gold_dim_severity"
-                          }
-                        },
-                        "Property": "severity_label"
-                      }
-                    },
-                    "Right": {
-                      "Literal": {
-                        "Value": "'Severity Level 8'"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
           }
         }
       ],
-      "valueAxis": [
+      "columnFormatting": [
         {
           "properties": {
-            "labelDisplayUnits": {
+            "styleSubtotals": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
+                  "Value": "true"
+                }
+              }
+            },
+            "styleValues": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             },
@@ -206,61 +117,118 @@
                 }
               }
             },
-            "start": {
+            "alignment": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "'Center'"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
                 }
               }
             }
+          },
+          "selector": {
+            "metadata": "_Measures.Total Incidents"
           }
         }
       ],
-      "labels": [
+      "values": [
         {
           "properties": {
-            "show": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "FillRule": {
+                      "Input": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "_Measures"
+                            }
+                          },
+                          "Property": "Total Incidents"
+                        }
+                      },
+                      "FillRule": {
+                        "linearGradient3": {
+                          "min": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#EEF5FB'"
+                              }
+                            }
+                          },
+                          "mid": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#9CCAE5'"
+                              }
+                            }
+                          },
+                          "max": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'#2878B5'"
+                              }
+                            }
+                          },
+                          "nullColoringStrategy": {
+                            "strategy": {
+                              "Literal": {
+                                "Value": "'asZero'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "_Measures.Total Incidents"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "autoExpand": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showExpandCollapseButtons": {
               "expr": {
                 "Literal": {
                   "Value": "true"
                 }
               }
             }
-          }
-        },
-        {
-          "properties": {
-            "labelPosition": {
-              "expr": {
-                "Literal": {
-                  "Value": "'OutsideEnd'"
-                }
-              }
-            },
-            "showSeries": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Measures.Average Incident Response Minutes"
-          }
-        },
-        {
-          "properties": {
-            "labelPosition": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Auto'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Measures.P90 Response Minutes"
           }
         }
       ]
@@ -272,14 +240,14 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Average Response Time by Initial Severity'"
+                  "Value": "'EMS Demand by Day and Hour'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "16D"
                 }
               }
             },
@@ -310,7 +278,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Severity levels with at least 100 incidents'"
+                  "Value": "'Incident concentration by day of week and hour of day'"
                 }
               }
             },
@@ -346,6 +314,13 @@
                       "Value": "'#DDE3EA'"
                     }
                   }
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -408,6 +383,7 @@
             }
           ]
         },
+        "howCreated": "User",
         "objects": {
           "general": [
             {
@@ -474,7 +450,8 @@
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
       },
       {
         "name": "9d2b4e11300cd3127d0e",
@@ -523,6 +500,34 @@
             }
           ]
         }
+      },
+      {
+        "name": "b22f35c895100cb355f9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dim_date"
+              }
+            },
+            "Property": "day_of_week_short_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d830340692fba6d434e1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dim_time"
+              }
+            },
+            "Property": "hour_label"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

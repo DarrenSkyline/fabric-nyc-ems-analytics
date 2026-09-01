@@ -249,7 +249,7 @@ table gold_dim_date
 		sourceLineageTag: day_of_week_short_name
 		summarizeBy: none
 		sourceColumn: day_of_week_short_name
-		sortByColumn: day_of_week_number
+		sortByColumn: day_of_week_sort
 
 		changedProperty = SortByColumn
 
@@ -290,6 +290,50 @@ table gold_dim_date
 		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
+
+	column month_start_date =
+			
+			DATE (
+			    YEAR ( gold_dim_date[full_date] ),
+			    MONTH ( gold_dim_date[full_date] ),
+			    1
+			)
+		formatString: mmm yyyy
+		lineageTag: 94d684ec-79c4-49fc-bbb2-7b4dcf2eff49
+		summarizeBy: none
+		expressionContext: userContext
+
+		changedProperty = Name
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column day_of_week_sort =
+			
+			MOD (
+			    gold_dim_date[day_of_week_number] + 5,
+			    7
+			) + 1
+		isHidden
+		formatString: 0
+		lineageTag: 8cc2558d-a680-45d1-9c77-9fbf14412ff2
+		summarizeBy: none
+		expressionContext: userContext
+
+		changedProperty = Name
+
+		changedProperty = SummarizeBy
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
 
 	partition gold_dim_date = entity
 		mode: directLake

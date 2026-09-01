@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "62a3ba8107a237672f85",
   "position": {
-    "x": 404.39393939393938,
-    "y": 154.99999999999997,
+    "x": 660.64516129032268,
+    "y": 157.2208436724566,
     "z": 13000,
     "height": 91.818181818181813,
-    "width": 360,
+    "width": 600,
     "tabOrder": 13000
   },
   "visual": {
@@ -23,12 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Average Incident Response Minutes"
+                  "Property": "Average Daily Incidents"
                 }
               },
-              "queryRef": "_Measures.Average Incident Response Minutes",
-              "nativeQueryRef": "Avg Response Time (min)",
-              "displayName": "Avg Response Time (min)"
+              "queryRef": "_Measures.Average Daily Incidents",
+              "nativeQueryRef": "Average Daily Incidents"
             }
           ]
         }
@@ -43,7 +42,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "Average Incident Response Minutes"
+                "Property": "Average Daily Incidents"
               }
             },
             "direction": "Descending"
@@ -98,17 +97,88 @@
             "labelPrecision": {
               "expr": {
                 "Literal": {
-                  "Value": "2L"
+                  "Value": "0L"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "_Measures.Average Incident Response Minutes"
+            "metadata": "_Measures.Average Daily Incidents"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#667085'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DDE3EA'"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ec035e631e8dab9734bd",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Daily Incidents"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "4146fd24045b6d00011f",
   "position": {
-    "x": 885.71428571428578,
-    "y": 625.71428571428578,
-    "z": 20000,
-    "height": 425.71428571428572,
-    "width": 1002.8571428571429,
+    "x": 1184.1737781225756,
+    "y": 676.245151280062,
+    "z": 18000,
+    "height": 375.36074476338246,
+    "width": 703.056633048875,
     "tabOrder": 20000
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "gold_dim_disposition"
+                      "Entity": "gold_dim_call_type"
                     }
                   },
-                  "Property": "disposition_category"
+                  "Property": "call_type"
                 }
               },
-              "queryRef": "gold_dim_disposition.disposition_category",
-              "nativeQueryRef": "disposition_category",
+              "queryRef": "gold_dim_call_type.call_type",
+              "nativeQueryRef": "call_type",
               "active": true
             }
           ]
@@ -36,17 +36,36 @@
           "projections": [
             {
               "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "gold_dim_call_type"
+                        }
+                      },
+                      "Property": "call_type_description"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(gold_dim_call_type.call_type_description)",
+              "nativeQueryRef": "First call_type_description"
+            },
+            {
+              "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Disposition Incident Percentage"
+                  "Property": "Initial Call Type Incident Percentage"
                 }
               },
-              "queryRef": "_Measures.Disposition Incident Percentage",
-              "nativeQueryRef": "Disposition Incident Percentage"
+              "queryRef": "_Measures.Initial Call Type Incident Percentage",
+              "nativeQueryRef": "Initial Call Type Incident Percentage"
             },
             {
               "field": {
@@ -61,20 +80,6 @@
               },
               "queryRef": "_Measures.Average Incident Response Minutes",
               "nativeQueryRef": "Average Incident Response Minutes"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "P90 Response Minutes"
-                }
-              },
-              "queryRef": "_Measures.P90 Response Minutes",
-              "nativeQueryRef": "P90 Response Minutes"
             }
           ]
         },
@@ -153,14 +158,14 @@
             "labelDisplayUnits": {
               "expr": {
                 "Literal": {
-                  "Value": "1D"
+                  "Value": "1000000D"
                 }
               }
             },
             "labelPrecision": {
               "expr": {
                 "Literal": {
-                  "Value": "0L"
+                  "Value": "2L"
                 }
               }
             },
@@ -251,7 +256,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Incident Outcomes by Disposition'"
+                  "Value": "'Top 10 Documented Initial Call Types'"
                 }
               }
             },
@@ -289,7 +294,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Distribution of transport and non-transport outcomes'"
+                  "Value": "'Most common documented dispatch classifications; UNKNOWN excluded'"
                 }
               }
             },
@@ -320,15 +325,178 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "06fd6e5c7af07d356c12",
+        "name": "8764ea3b429ba21d690d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Incidents"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f20104e8cbec5c7a3ab9",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "gold_dim_disposition"
+                "Entity": "gold_dim_call_type"
               }
             },
-            "Property": "disposition_category"
+            "Property": "call_type"
+          }
+        },
+        "type": "TopN",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "subquery",
+              "Expression": {
+                "Subquery": {
+                  "Query": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "g1",
+                        "Entity": "gold_dim_call_type",
+                        "Type": 0
+                      },
+                      {
+                        "Name": "_",
+                        "Entity": "_Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Select": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "g1"
+                            }
+                          },
+                          "Property": "call_type"
+                        },
+                        "Name": "field"
+                      }
+                    ],
+                    "OrderBy": [
+                      {
+                        "Direction": 2,
+                        "Expression": {
+                          "Measure": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "_"
+                              }
+                            },
+                            "Property": "Total Incidents"
+                          }
+                        }
+                      }
+                    ],
+                    "Top": 10
+                  }
+                }
+              },
+              "Type": 2
+            },
+            {
+              "Name": "g1",
+              "Entity": "gold_dim_call_type",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "g1"
+                          }
+                        },
+                        "Property": "call_type"
+                      }
+                    }
+                  ],
+                  "Table": {
+                    "SourceRef": {
+                      "Source": "subquery"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "8b5ef2026f93da5a68a9",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dim_call_type"
+                  }
+                },
+                "Property": "call_type_description"
+              }
+            },
+            "Function": 3
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fc7cf6b62fa901d74f11",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Initial Call Type Incident Percentage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2744147d55fdd2729414",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Incident Response Minutes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b8f5cf21b7c7f96dfa34",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dim_call_type"
+              }
+            },
+            "Property": "call_type"
           }
         },
         "type": "Categorical",
@@ -337,7 +505,7 @@
           "From": [
             {
               "Name": "g",
-              "Entity": "gold_dim_disposition",
+              "Entity": "gold_dim_call_type",
               "Type": 0
             }
           ],
@@ -355,7 +523,7 @@
                                 "Source": "g"
                               }
                             },
-                            "Property": "disposition_category"
+                            "Property": "call_type"
                           }
                         }
                       ],
@@ -364,6 +532,13 @@
                           {
                             "Literal": {
                               "Value": "null"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'UNKNOW'"
                             }
                           }
                         ]
