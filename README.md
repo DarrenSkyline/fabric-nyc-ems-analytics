@@ -22,6 +22,18 @@ The project demonstrates:
 * Time-series analysis and forecasting preparation
 * Business-focused data storytelling
 
+## Fabric Workspace Git Integration
+
+The [`fabric/`](fabric/) directory is connected to the Microsoft Fabric
+**NYC EMS Analytics** workspace through Fabric Git integration. Supported
+workspace item definitions are version-controlled in this directory. When
+workspace changes are committed through Fabric source control, the latest
+supported item definitions are synchronised to the connected GitHub branch.
+
+The `fabric/` directory contains workspace metadata and item definitions rather
+than the underlying OneLake or Lakehouse data. Raw data, credentials, runtime
+state, and execution history are not exported to GitHub through this connection.
+
 ## Dataset
 
 * **Source:** NYC Open Data
@@ -482,6 +494,7 @@ Business Insights and Recommendations
 * Semantic-model and DAX QA report page
 * Power BI Executive Overview report page
 * Power BI Emergency Demand report page
+* Microsoft Fabric workspace Git integration through the `fabric/` directory
 
 ### In Progress
 
