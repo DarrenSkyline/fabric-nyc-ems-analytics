@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "c91765f23490107fe6b9",
+  "displayName": "Tooltip - Disposition Detail",
+  "displayOption": "FitToPage",
+  "height": 300,
+  "width": 400,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "40c79b7d54c85971e6b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dim_date"
+              }
+            },
+            "Property": "year"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "0010b0cc1a50d86b91ff",
+    "type": "Tooltip",
+    "parameters": [
+      {
+        "name": "dc9a53b07f3829d46e36",
+        "boundFilter": "40c79b7d54c85971e6b0",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dim_date"
+              }
+            },
+            "Property": "year"
+          }
+        }
+      }
+    ],
+    "acceptsFilterContext": "None"
+  },
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "c2163c16138f670eadb0",
+  "position": {
+    "x": 30,
+    "y": 45.38461538461538,
+    "z": 3000,
+    "height": 22.307692307692307,
+    "width": 656.15384615384608,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Historical monthly incident demand with a 12-month forecast and 95% confidence interval",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#dce6f0"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
