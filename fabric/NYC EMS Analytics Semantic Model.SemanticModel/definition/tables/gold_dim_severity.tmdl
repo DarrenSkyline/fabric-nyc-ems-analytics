@@ -65,6 +65,34 @@ table gold_dim_severity
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Severity Display Label' =
+			
+			VAR SeverityCode =
+			    gold_dim_severity[severity_level_code]
+			RETURN
+			    SWITCH (
+			        SeverityCode,
+			        1, "Severity Level 1",
+			        2, "Severity Level 2",
+			        3, "Severity Level 3",
+			        4, "Severity Level 4",
+			        5, "Severity Level 5",
+			        6, "Severity Level 6",
+			        7, "Severity Level 7",
+			        8, "Severity Level 8",
+			        9, "Severity Level 9",
+			        BLANK ()
+			    )
+		lineageTag: 4b325099-a937-41a0-86ae-4b21883c3ac8
+		summarizeBy: none
+		expressionContext: userContext
+
+		changedProperty = Name
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
 	partition gold_dim_severity = entity
 		mode: directLake
 		source

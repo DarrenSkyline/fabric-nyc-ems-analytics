@@ -839,33 +839,6 @@ table _Measures
 		displayFolder: 03 Reliability\Control Limits
 		lineageTag: ab462c38-5ef4-46bd-bca7-39fc23383eba
 
-	measure 'Response Center Line Minutes' =
-			
-			SELECTEDVALUE (
-			    gold_agg_daily_performance[response_center_line_minutes]
-			)
-		formatString: 0.00
-		displayFolder: 03 Reliability\Control Limits
-		lineageTag: 68f2a24e-3604-4d2e-9096-5b1201af1c4b
-
-	measure 'Upper Control Limit Minutes' =
-			
-			SELECTEDVALUE (
-			    gold_agg_daily_performance[upper_control_limit_minutes]
-			)
-		formatString: 0.00
-		displayFolder: 03 Reliability\Control Limits
-		lineageTag: 0bff0e72-0d21-4b8a-8db4-da186eb9ed97
-
-	measure 'Lower Control Limit Minutes' =
-			
-			SELECTEDVALUE (
-			    gold_agg_daily_performance[lower_control_limit_minutes]
-			)
-		formatString: 0.00
-		displayFolder: 03 Reliability\Control Limits
-		lineageTag: 41c988a9-1fa3-44de-8b1a-7fc45cf0cdd4
-
 	measure 'Daily Aggregate Incidents' =
 			
 			SUM (
@@ -977,6 +950,110 @@ table _Measures
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: 04 Demand\Demand and Response
 		lineageTag: 0d78923b-5510-422e-8180-b4b748538e9e
+
+	measure 'Selected Period Response Center Line Minutes' =
+			
+			VAR SelectedDates =
+			    CALCULATETABLE (
+			        VALUES ( gold_dim_date[full_date] ),
+			        ALLSELECTED ( gold_dim_date[full_date] )
+			    )
+			VAR DailyValues =
+			    FILTER (
+			        ADDCOLUMNS (
+			            SelectedDates,
+			            "@DailyAverage",
+			                CALCULATE (
+			                    [Daily Performance Average Response Minutes]
+			                )
+			        ),
+			        NOT ISBLANK ( [@DailyAverage] )
+			    )
+			RETURN
+			    AVERAGEX (
+			        DailyValues,
+			        [@DailyAverage]
+			    )
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: d2844aa8-65db-4630-bc6e-4f1c7a985c32
+
+	measure 'Selected Period Upper Control Limit Minutes' =
+			
+			VAR SelectedDates =
+			    CALCULATETABLE (
+			        VALUES ( gold_dim_date[full_date] ),
+			        ALLSELECTED ( gold_dim_date[full_date] )
+			    )
+			VAR DailyValues =
+			    FILTER (
+			        ADDCOLUMNS (
+			            SelectedDates,
+			            "@DailyAverage",
+			                CALCULATE (
+			                    [Daily Performance Average Response Minutes]
+			                )
+			        ),
+			        NOT ISBLANK ( [@DailyAverage] )
+			    )
+			VAR CenterLine =
+			    AVERAGEX (
+			        DailyValues,
+			        [@DailyAverage]
+			    )
+			VAR DailyStdDev =
+			    STDEVX.P (
+			        DailyValues,
+			        [@DailyAverage]
+			    )
+			RETURN
+			    IF (
+			        COUNTROWS ( DailyValues ) >= 2,
+			        CenterLine + 3 * DailyStdDev
+			    )
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: 99295ace-b6cb-4a52-bcf5-c179b14e6a4f
+
+	measure 'Selected Period Lower Control Limit Minutes' =
+			
+			VAR SelectedDates =
+			    CALCULATETABLE (
+			        VALUES ( gold_dim_date[full_date] ),
+			        ALLSELECTED ( gold_dim_date[full_date] )
+			    )
+			VAR DailyValues =
+			    FILTER (
+			        ADDCOLUMNS (
+			            SelectedDates,
+			            "@DailyAverage",
+			                CALCULATE (
+			                    [Daily Performance Average Response Minutes]
+			                )
+			        ),
+			        NOT ISBLANK ( [@DailyAverage] )
+			    )
+			VAR CenterLine =
+			    AVERAGEX (
+			        DailyValues,
+			        [@DailyAverage]
+			    )
+			VAR DailyStdDev =
+			    STDEVX.P (
+			        DailyValues,
+			        [@DailyAverage]
+			    )
+			RETURN
+			    IF (
+			        COUNTROWS ( DailyValues ) >= 2,
+			        MAX (
+			            0,
+			            CenterLine - 3 * DailyStdDev
+			        )
+			    )
+		formatString: 0.00
+		displayFolder: 03 Reliability\Control Limits
+		lineageTag: d19dee63-d1ab-474e-bbca-7ce13ebb61c3
 
 	column 'Measure Holder'
 		isHidden

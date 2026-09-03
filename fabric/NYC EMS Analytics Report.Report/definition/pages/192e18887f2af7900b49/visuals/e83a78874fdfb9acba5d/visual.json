@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "e83a78874fdfb9acba5d",
+  "position": {
+    "x": 52.830188679245282,
+    "y": 861.88679245283026,
+    "z": 13000,
+    "height": 143.39622641509433,
+    "width": 985.66037735849056,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Forecast Summary",
+                    "textStyle": {
+                      "fontSize": "16pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Monthly EMS incident demand is projected to remain broadly stable over the next 12 months. ",
+                    "textStyle": {
+                      "fontSize": "16pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The widening 95% confidence interval indicates increasing uncertainty further into the forecast horizon.",
+                    "textStyle": {
+                      "fontSize": "16pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

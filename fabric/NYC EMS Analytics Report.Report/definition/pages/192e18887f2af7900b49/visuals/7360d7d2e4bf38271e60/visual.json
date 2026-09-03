@@ -1,0 +1,88 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "7360d7d2e4bf38271e60",
+  "position": {
+    "x": 1550.1886792452831,
+    "y": 861.88679245283026,
+    "z": 14000,
+    "height": 149.43396226415095,
+    "width": 335.09433962264154,
+    "tabOrder": 14000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Forecast Settings",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Forecast horizon: 12 months",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Confidence interval: 95%",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Seasonality: 12 monthly periods",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Method: Power BI built-in forecasting",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "color": "#667085"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
