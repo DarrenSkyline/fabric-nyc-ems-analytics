@@ -19,7 +19,7 @@ The project demonstrates:
 * Population standard deviation
 * Upper and lower statistical control limits
 * Anomaly detection
-* Time-series analysis and forecasting preparation
+* Time-series analysis and forecasting
 * Business-focused data storytelling
 
 ## Fabric Workspace Git Integration
@@ -338,6 +338,15 @@ The Silver pipeline confirms row-count preservation, complete and unique inciden
 
 ![Silver transformation validation](screenshots/03_silver_validation.png)
 
+### Gold Dimension Validation
+
+The Gold dimension validation confirms that the Date, Time, Geography, Call
+Type, Severity, and Disposition dimensions are non-empty, contain unique
+surrogate keys, and preserve the controlled unknown and undocumented members
+required for complete fact-table mapping.
+
+![Gold dimension validation](screenshots/04_gold_dimensions_validation.png)
+
 ### Gold Fact Validation
 
 The Gold fact validation confirms the incident-level grain, row-count reconciliation, identifier uniqueness, yearly totals, and dimension-key integrity.
@@ -415,6 +424,90 @@ undocumented values remain available for separate data-quality analysis.
 
 ![NYC EMS Emergency Demand](screenshots/11_power_bi_emergency_demand.png)
 
+### Response Performance
+
+The completed Response Performance page evaluates both the speed and
+reliability of EMS response. Interactive Year, Borough, Initial Severity, and
+Initial Call Type filters allow operational performance to be examined in the
+selected context.
+
+The page includes:
+
+* Average and P90 incident-response time
+* Population standard deviation and coefficient of variation
+* Historical centre line and upper and lower statistical control limits
+* Reportable response anomalies with minimum-sample safeguards
+* Held-versus-non-held response-time comparison
+* Daily incident demand versus response-time performance
+
+![NYC EMS Response Performance](screenshots/12_power_bi_response_performance.png)
+
+### Outcomes and Classification
+
+The completed Outcomes and Classification page examines how incidents conclude
+and how EMS classifications change between initial dispatch and final closure.
+Interactive filters support comparison across years, boroughs, initial severity
+levels, and initial call types.
+
+The page includes:
+
+* Incident disposition and transport-status distributions
+* Annual and borough-level outcome comparisons
+* Initial and final call-type distributions
+* Initial and final incident-severity comparison
+* Call-type and severity classification-change rates
+* Detailed disposition tooltips for low-frequency outcome categories
+
+![NYC EMS Outcomes and Classification](screenshots/13_power_bi_outcomes_classification.png)
+
+### Forecasting
+
+The completed Forecasting page extends the historical monthly incident-demand
+series with a 12-month Power BI forecast. It uses 12 monthly periods for
+seasonality and displays a 95% confidence interval to communicate increasing
+uncertainty across the forecast horizon.
+
+Borough, Initial Severity, and Initial Call Type filters support segmented
+forecast analysis. A Year filter is intentionally excluded so the model retains
+the complete 2019–2025 historical series when generating the forecast.
+
+![NYC EMS Incident Demand Forecast](screenshots/14_power_bi_forecasting.png)
+
+## Key Findings
+
+* The analytical pipeline processed and reconciled 10,881,496 EMS incidents
+  across the complete 2019–2025 period.
+* Held incidents represented 10.97% of incident volume but recorded an average
+  response time of 35.07 minutes, compared with 8.97 minutes for non-held
+  incidents—a difference of 26.10 minutes.
+* Transported incidents accounted for 6,846,140 records, or 62.92% of total
+  incident volume. A further 2,191,137 incidents were classified as not
+  transported.
+* Initial and final call-type classifications differed for 13.47% of incidents,
+  demonstrating the value of retaining both role-playing dimensions in the
+  semantic model.
+* Response-time variability is substantial: the overall response-time
+  coefficient of variation is 144.27%, while 2.64% of analyzable daily groups
+  are identified as reportable anomalies after applying sample-quality rules.
+* The 12-month forecast projects broadly stable central monthly demand, while
+  the widening 95% confidence interval shows that uncertainty increases further
+  into the forecast horizon.
+
+## Operational Recommendations
+
+* Monitor held incidents as a distinct operational cohort because their response
+  times are materially longer than those of non-held incidents.
+* Use P90, standard deviation, coefficient of variation, and control limits
+  alongside averages when evaluating service reliability.
+* Review reportable anomaly periods by borough and initial severity to separate
+  isolated variation from recurring operational pressure.
+* Align staffing and resource planning with recurring hour-of-day,
+  day-of-week, borough, and call-type demand patterns.
+* Use the forecast confidence interval—not only the central forecast—for
+  capacity planning and contingency decisions.
+* Continue retaining undocumented source classifications explicitly so that
+  data-quality limitations remain visible and auditable.
+
 ## Analytics Workflow
 
 ```text
@@ -457,6 +550,8 @@ Business Insights and Recommendations
 
 ## Project Status
 
+**Status: Completed**
+
 ### Completed
 
 * Project structure and repository setup
@@ -494,15 +589,10 @@ Business Insights and Recommendations
 * Semantic-model and DAX QA report page
 * Power BI Executive Overview report page
 * Power BI Emergency Demand report page
+* Power BI Response Performance report page
+* Power BI Outcomes and Classification report page
+* Power BI Forecasting report page with a 12-month forecast and 95% confidence interval
+* Consistent report formatting, filters, tooltips, and interactions
+* Power BI report screenshots for all five analytical pages
+* Documented key findings and operational recommendations
 * Microsoft Fabric workspace Git integration through the `fabric/` directory
-
-### In Progress
-
-* Remaining Power BI analytical report pages
-
-### Next Steps
-
-* Develop response-performance, reliability, and outcomes/classification pages
-* Apply consistent report formatting, navigation, tooltips, and interactions
-* Add time-series forecasting and projection visuals
-* Document findings and business recommendations
