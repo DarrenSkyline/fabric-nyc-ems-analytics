@@ -1,0 +1,336 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "682d6273c4613f52203c",
+  "position": {
+    "x": 10.282328920723646,
+    "y": 555.24576171907688,
+    "z": 10001,
+    "height": 123.38794704868374,
+    "width": 1885.7791240607166,
+    "tabOrder": 10001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Incidents"
+                }
+              },
+              "queryRef": "_Measures.Total Incidents",
+              "nativeQueryRef": "Total Incidents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Held Incident Percentage"
+                }
+              },
+              "queryRef": "_Measures.Held Incident Percentage",
+              "nativeQueryRef": "Held Incident Percentage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Average Held Response Minutes"
+                }
+              },
+              "queryRef": "_Measures.Average Held Response Minutes",
+              "nativeQueryRef": "Average Held Response Minutes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Average Non-Held Response Minutes"
+                }
+              },
+              "queryRef": "_Measures.Average Non-Held Response Minutes",
+              "nativeQueryRef": "Average Non-Held Response Minutes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Held Response Difference Minutes"
+                }
+              },
+              "queryRef": "_Measures.Held Response Difference Minutes",
+              "nativeQueryRef": "Held Response Difference Minutes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Transported Incidents"
+                }
+              },
+              "queryRef": "_Measures.Transported Incidents",
+              "nativeQueryRef": "Transported Incidents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Transported Incident Percentage"
+                }
+              },
+              "queryRef": "_Measures.Transported Incident Percentage",
+              "nativeQueryRef": "Transported Incident Percentage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Not Transported Incidents"
+                }
+              },
+              "queryRef": "_Measures.Not Transported Incidents",
+              "nativeQueryRef": "Not Transported Incidents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Call Type Change Percentage"
+                }
+              },
+              "queryRef": "_Measures.Call Type Change Percentage",
+              "nativeQueryRef": "Call Type Change Percentage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Response CV Percentage"
+                }
+              },
+              "queryRef": "_Measures.Response CV Percentage",
+              "nativeQueryRef": "Response CV Percentage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Reportable Anomaly Percentage"
+                }
+              },
+              "queryRef": "_Measures.Reportable Anomaly Percentage",
+              "nativeQueryRef": "Reportable Anomaly Percentage"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d260f20e6ea82498c4c9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Incidents"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ff925ec407d0ea3cb68b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Held Incident Percentage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4755c700ec5021068d70",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Held Response Minutes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f8c9221e7e68b69b5168",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average Non-Held Response Minutes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "78a24c3553a7d404e582",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Held Response Difference Minutes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f4936e4463cfa7432bb0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Transported Incidents"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "19377c7d9011b19cc433",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Not Transported Incidents"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "79d0ec3a2bbdd31319f5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Transported Incident Percentage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f7fc8849aa487c166c99",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Call Type Change Percentage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3b6ff274c3b97e7bef8c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Response CV Percentage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3321fcce49f90c98ad8a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Reportable Anomaly Percentage"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
